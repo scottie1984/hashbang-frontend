@@ -1,0 +1,209 @@
+<div class="row">
+  <div class="col-md-12">
+     <ul class="nav nav-tabs" ng-controller="startRandomTagCtrl">
+      <li><a href="#!/" data-toggle="tab">Popular</a></li>
+      <li><a href="#!/recent" data-toggle="tab">Recent</a></li>
+      <li><a href="#!/random" data-toggle="tab">Random</a></li>
+      <li ng-if="getCurrentTag()" class="active"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
+      <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>    
+      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>        
+      </ul>
+  </div>
+</div>
+<br />
+<div class="clearfix"></div>
+
+<div class="row">
+<div class="col-xs-6 col-sm-3">
+  <section class="prev" ng-repeat="key in ratings" ng-hide="key.previous.id == null">
+    <h2 class="rating-header"><i class="fa fa-thumbs-up"></i> {{key.previous.overallScore}}</h2>
+    <div class="image-container">
+    <img ng-src="{{key.previous.file_name_medium}}" class="img-responsive" ng-if="key.previous.type === 'image'">
+    <img ng-src="https://i1.ytimg.com/vi/{{key.previous.original_file_name}}/hqdefault.jpg" class="img-responsive" ng-if="key.previous.type === 'video'">
+    <!-- <h2><span><i class="fa fa-thumbs-up"></i> {{key.previous.overallScore}}</span></h2> -->
+    </div>
+  </section>
+
+  <section class="home-popular-images" ng-controller="topCtrl">
+  <h2 class="rating-header"><i class="fa fa-trophy"></i> Top 3 in {{getPageTag() |  characters:10 :true }}</h2>
+        <ul class="tags" style="margin-left: 0">
+          <li ng-repeat="(key, value) in top | slice:0:3" >
+           <a href="#!/rate/tag/{{getPageTag()}}/{{value.id}}/{{value.id}}" class="bordered pull-left">
+            <div class="image-contain" > 
+                    <img ng-src="{{value.file_name_medium}}"  ng-if="value.type === 'image'" >
+                    <img ng-src="https://i1.ytimg.com/vi/{{value.original_file_name}}/hqdefault.jpg"  ng-if="value.type === 'video'">
+                    <div class="image-text">
+                    <h4>{{$index+1}}. {{value.title  | characters:17 :true}}</h4>
+                    <h5>{{value.userid}}</h5>
+                    </div>
+              </div>
+            </a>
+            <div class="side-top">
+            <span class="trophy ng-scope" ng-if="$index == 0 || $index == 1 || $index == 2" ng-class="{ 'top-one' : $index == 0, 'top-two' : $index == 1, 'top-three' : $index == 2 }"><i class="fa fa-trophy"></i></span>
+            <img gravatar-src="'{{value.gravatar}}'" class="profile-thumb-30" gravatar-size="30"> 
+            </div>
+          </li>
+        </ul> 
+        <p><a href="#!/top/{{getPageType()}}/{{getPageTag()}}" class="btn btn-sm btn-info"><span class="fa fa-heart"></span>&nbsp;Top 20 in {{getPageTag()}}</a></p>
+
+    </section>
+
+<!--
+ <section class="top top-image" ng-class="{ 'top-one' : $index == 0, 'top-two' : $index == 1, 'top-three' : $index == 2 }">
+              <span class="trophy" ng-if="$index == 0 || $index == 1 || $index == 2"><i class="fa fa-trophy"></i></span>
+              <div class="top-score-container hidden-sm hidden-xs">
+                <h2 class="top-score"><span>{{$index+1}}</span></h2>
+               </div>
+                <div class="image-container">
+                    <a href="#!/rate/tag/{{getPageTag()}}/{{value.id}}/{{value.id}}">
+                    <img alt="" ng-src="{{value.file_name_thumb}}" class="img-rounded" ng-if="value.type === 'image'" width="120" height="90">
+                    <img ng-src="https://i1.ytimg.com/vi/{{value.original_file_name}}/default.jpg" class="img-rounded topimg" ng-if="value.type === 'video'" width="120" height="90"></a>
+                  </div>
+                  <div class="top-details">
+                    <h3 class="leaderboard-title"><span class="visible-sm visible-xs sm-score">{{$index+1}}</span>{{value.title}}</h3>
+                    <h4><a href="#!/rate/user/{{value.userid}}">{{value.userid}}</a></h4>
+                    <p><i class="fa fa-thumbs-up"></i> <span id="upload_{{value.id}}">{{value.overallScore}}</span></p>
+
+                  </div>
+            </section>
+
+  <section class="categories hidden-xs" ng-controller="tagPopularCtrl">
+    <h3><i class="glyphicon glyphicon-fire"></i> Popular tags</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+    <a href="#!/tagsearch">More...</a>
+  </section>
+
+
+    <section class="categories hidden-xs" ng-controller="tagRecentCtrl">
+      <h3><i class="glyphicon glyphicon-send"></i> Recent tags</h3>
+      <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+        <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+      </ul>
+      <a href="#!/tagsearch">More...</a>
+    </section> -->
+
+</div>
+
+<div class="col-xs-6 col-sm-3 col-sm-push-6" ng-repeat="key in ratings">
+  <section class="next">
+  <h2 class="rating-header">Next...</h2>
+  <div class="image-container">
+    <img ng-src="{{key.next.file_name_medium}}" class="img-responsive" ng-if="key.next.type === 'image'"  ng-hide="key.next.type === 'end'">
+    <img ng-src="https://i1.ytimg.com/vi/{{key.next.original_file_name}}/hqdefault.jpg" class="img-responsive" ng-if="key.next.type === 'video'"  ng-hide="key.next.type === 'end'">
+    <!-- <h2 class="next" ng-hide="key.next.type === 'end'"><span>Next...</span></h2> -->
+    <img src="/public/img/end.png" class="img-responsive" ng-if="key.next.type === 'end'">
+    <h2 class="next" ng-if="key.next.type === 'end'"><span>No more in {{getPageTag()}}</span></h2>
+  </div>
+  </section>
+
+<!--
+        <section class="categories hidden-xs" ng-controller="tagPopularCtrl">
+    <h3><i class="fa fa-trophy"></i> Top 20 in</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud | orderBy:key.count:reverse" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/top/{{getPageType()}}/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+  </section> -->
+</div>
+
+<div class="col-xs-12 col-sm-6 col-sm-pull-3" ng-repeat="key in ratings">
+  <section class="current">  
+  <a href="#!/upload" class="btn btn-xs btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;Upload</a>
+  <h2 class="rating-header"><i class="fa fa-tag"></i> {{getPageTag()}}</h2>
+
+        <img ng-src="{{key.current.file_name}}" class="img-responsive" ng-if="key.current.type === 'image'">
+        <youtube code="{{key.current.original_file_name}}" ng-if="key.current.type === 'video'"></youtube>
+            <div class="rating">
+              <div style="text-align:center; margin: 20px 0">
+                <button id="like" class="btn btn-info" popover-placement="bottom" popover="I like it"  popover-trigger="mouseenter" ng-click ="getValue(1, key.previous.id, key.current.id, key.next.id)"><i class="fa fa-thumbs-up"></i></button>
+                <button id="likelot" class="btn btn-success" popover-placement="bottom" popover="I like it alot"  popover-trigger="mouseenter" ng-click ="getValue(2, key.previous.id, key.current.id, key.next.id)"><i class="fa fa-star"></i></button>
+                <button id="love" class="btn btn-primary" popover-placement="bottom" popover="I love it!"  popover-trigger="mouseenter" ng-click ="getValue(3, key.previous.id, key.current.id, key.next.id)"><i class="fa fa-heart"></i></button>
+                <button id="next" class="btn btn-default" popover-placement="bottom" popover="Meh...next"  popover-trigger="mouseenter" ng-click ="getValue(0, key.previous.id, key.current.id, key.next.id)"><i class="fa fa-arrow-right" ></i></button>
+                </div>
+              </div>          
+              <div class="caption">
+                <a href="#!/rate/user/{{key.current.userid}}"><img gravatar-src="'{{key.current.gravatar}}'" class="profileThumb"></a>
+                <a href="#!/rate/user/{{key.current.userid}}" class="user-link">{{key.current.userid}}</a> 
+                <h3>{{key.current.title}}</h3>
+                <p ng-show="{{key.current.description.length !== 0 && key.current.description.length > 120 }}" class="pull-right"><button class="btn btn-default btn-xs" style="margin-top: 20px;" ng-click="showDetails = ! showDetails">Show <span ng-if="!showDetails">more</span><span ng-if="showDetails">less</span></button></p>
+                <p ng-if="!showDetails">{{key.current.description | characters:120 :true }}</p>
+                <p ng-if="showDetails">{{key.current.description}}</p>
+
+                <ul class="tags">
+                  <h4>Tags:</h4>
+                  <li ng-repeat="(key, value) in key.current.tags"><span class="label label-primary"><a href="#!/rate/tag/{{value}}">{{value}}</a></span></li>
+                </ul>   
+              </div> 
+  </section>
+
+
+
+ <h3 class="comment-header"><i class="fa fa-comments-o"></i> Comments</h3>
+
+   <div ng-if="isUserLogged">
+      <form role="form" ng-controller="commentCtrl" ng-submit="submitComment(commentForm.$valid, key.previous.id, key.current.id);" name="commentForm" novalidate>
+
+			<!-- COMMENT TEXT -->
+			<div class="form-group" ng-class="{ 'has-error' : commentForm.comment.$invalid && !commentForm.comment.$pristine || submittedError && commentForm.comment.$invalid && !commentForm.comment.$dirty}">
+
+        <textarea class="form-control" rows="4" id="comment" name="comment" ng-model="comment" placeholder="Say what you have to say" ng-minlength="3" ng-maxlength="1000" required></textarea>
+
+        <!-- <textarea class="form-control" rows="4" name="comment" ng-model="$parent.$parent.comment" placeholder="Say what you have to say" ng-minlength="3" ng-maxlength="1000" required></textarea> -->
+
+        <p ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine || submittedError && commentForm.comment.$invalid && !commentForm.comment.$dirty" class="help-block">Comment is required</p>
+        <p ng-show="commentForm.comment.$error.minlength" class="help-block">Comment is too short</p>
+        <p ng-show="commentForm.comment.$error.maxlength" class="help-block">Comment is too long</p>
+			</div>
+		
+			<!-- SUBMIT BUTTON -->
+			<div class="form-group">	
+				<button type="submit" class="btn btn-primary btn-sm pull-right">Submit comment</button>
+			</div>
+      <p ng-show="commentMessage" class="help-block">{{commentMessage}}</p>
+		</form>
+  </div>
+  <div ng-if="!isUserLogged"><a href="#!/login">Log in</a> to comment</div>
+
+    <div class="clearfix"></div>
+
+
+		<!-- THE COMMENTS =============================================== -->
+		<!-- hide these comments if the loading variable is true -->
+    <ul class="comment">
+  		<li ng-hide="loading" ng-repeat="comment in key.current.comments">
+        <div class="comment-avatar">
+          <a href="#"><img gravatar-src="'{{comment.gravatar}}'" class="profileThumb" gravatar-size="60"></a>
+        </div>
+        <div class="comment-body">
+          <div class="fa fa-play fa-flip-horizontal comment-triangle"></div>
+  			 <p>{{ comment.comment }}</p>
+        </div>
+  			<p class="comment-info pull-right"><a href="#">{{ comment.username }}</a> {{ comment.datetime }}</p>
+  		</li>
+    </ul>
+
+
+</div>
+
+<!-- 
+<div class="col-xs-12 visible-xs">
+  <section class="categories" ng-controller="tagPopularCtrl">
+    <h3><i class="glyphicon glyphicon-fire"></i> Popular tags</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+    <a href="#!/tagsearch">More...</a>
+  </section>
+
+    <section class="categories" ng-controller="tagRecentCtrl">
+      <h3><i class="glyphicon glyphicon-send"></i> Recent tags</h3>
+      <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+        <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+      </ul>
+      <a href="#!/tagsearch">More...</a>
+    </section>
+
+</div> -->
+
+</div>

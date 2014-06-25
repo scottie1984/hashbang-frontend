@@ -1,0 +1,33 @@
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+         <button type="button" class="navbar-toggle"  ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar" style="color:pink"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> 
+          <a class="navbar-brand" href="#!"><span class="logo-graphic">#!it</span><span class="logo-type">hashbang.it</span></a>
+                      <div class="nav-search" ng-hide="getPage(1) == 'tagsearch'">
+              <form name="topSearchForm" ng-submit="searchQuery(topQuery)">
+                <div class="input-group">
+                <input type="text" id="top-search" class="form-control" ng-model="topQuery" placeholder="Search tags" ng-change="searchClear(topQuery)">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="searchQuery(topQuery)"><i class="fa fa-search"></i></button>
+                </span>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div collapse="isCollapsed" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-if="isUserLogged"><a href="#!/{{isUserLogged}}"><img ng-if="gravatarEmail" gravatar-src="'{{gravatarEmail}}'" class="profileThumb" gravatar-size="24">{{isUserLogged}}</a></li>
+            <li ng-if="!isUserLogged"><a href="#!/signup">Sign up</a></li>
+            <li ng-if="!isUserLogged"><a href="#!/login">Login</a></li>
+            <li><a href="#!/upload">Upload</a></li>
+            <li ng-if="isUserLogged"><a href="#!/logout">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+ 
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="row" id="top">
+	<div class="col-md-12">
+		<section class="login">
+			<h2>Login</h2>
+				<div class="row">
+					<span class="fa fa-key fa-flip-horizontal page-bg"></span>
+					<form class="form-signin col-xs-12 col-sm-6 col-md-5" role="form" name="loginForm" ng-submit="processForm(loginForm.$valid)" novalidate>
+			
+						<div class="form-group" ng-class="{ 'has-error' : loginForm.username.$error.required && !loginForm.username.$pristine || submittedError && loginForm.username.$invalid && !loginForm.username.$dirty || errorMessage}">
+							<p class="help-block"  style='height:20px'>{{errorMessage}}</p>
+							<label for="username">Username</label>
+							<input name="username" type="username" class="form-control" autofocus ng-model="username" autocomplete="off" required>
+							<p ng-show="loginForm.username.$error.required && !loginForm.username.$pristine || submittedError && loginForm.username.$invalid && !loginForm.username.$dirty" class="help-block">Username is required</p>
+						</div>
+
+						<div class="form-group" ng-class="{ 'has-error' : loginForm.password.$error.required && !loginForm.password.$pristine || submittedError && loginForm.password.$invalid && !loginForm.password.$dirty || errorMessage}">
+							<label for="password">Password</label>
+			        		<input name="password" password="password" type="password" class="form-control" required ng-model="password" autocomplete="off" required>
+			        		<p ng-show="loginForm.password.$error.required && !loginForm.password.$pristine || submittedError && loginForm.password.$invalid && !loginForm.password.$dirty" class="help-block">Password is required</p>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+						</div>
+					        <label class="checkbox" for="checkbox1" style="display: inline-block;">
+			            <span class="icons">
+			            	<span class="first-icon fui-checkbox-unchecked"></span>
+			            	<span class="second-icon fui-checkbox-checked"></span>
+			            </span>
+			            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+			            Remember me
+			          </label>
+			          <a href="#!/forgot" class="reset-password">Reset password</a>
+						<div class="login-links">
+							<p>Don't have an account? <a href="#!/signup">Sign up</a></p>
+						</div>
+					</form>
+
+				</div>
+		</section>
+	</div> 
+</div>      

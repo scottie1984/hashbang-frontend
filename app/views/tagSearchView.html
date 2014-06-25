@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+     <ul class="nav nav-tabs" ng-controller="startRandomTagCtrl">
+      <li><a href="#!/" data-toggle="tab">Popular</a></li>
+      <li><a href="#!/recent" data-toggle="tab">Recent</a></li>
+      <li><a href="#!/random" data-toggle="tab">Random</a></li>
+      <li ng-if="getCurrentTag()"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
+      <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>   
+      <li class="active"><a href="#!/tagsearch" data-toggle="tab">Search</a></li>        
+      </ul>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="home-page-h3">Tag search</h3>
+    
+                   <div class="row">
+         <div class="col-xs-12 col-sm-6 col-md-5">
+<input type="text" class="form-control" id="main-search" ng-model="query" placeholder="Search tags" ng-change="searchTags('all', query, 'all')">
+          </div>
+          </div>
+
+<br />
+
+       <div class="row">
+         <div class="col-md-12">
+             <div class="form-group">
+                <div class="btn-group">
+                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'all'" uncheckable ng-change="searchTags(radioModel, query, 'all')">All</label>
+                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'popular'" uncheckable ng-change="searchTags(radioModel, query, 'all')"><i class="glyphicon glyphicon-fire"></i> Popular</label>
+                    <label class="btn btn-info" ng-model="radioModel" btn-radio="'recent'" uncheckable ng-change="searchTags(radioModel, query, 'all')"><i class="glyphicon glyphicon-send"></i> Recent</label>
+                </div>
+            </div>
+          </div>  
+        </div>  
+
+
+
+ <section class="search-results-tags" >
+              <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud" masonry="{'transitionDuration': 0}" column-width="1" >
+                <li ng-repeat="key in tagCloud.tagCloud" class="tag-list masonry-brick {{imgSize(key.count,tagCloud.minCount,tagCloud.maxCount)}}"  style=" margin-bottom: -1px !important; ">
+                  <a href="#!/rate/tag/{{key.tag}}/{{key.random_id}}/{{key.random_id}}" class="bordered">
+                    <div class="image-contain"> 
+                      <div class="img-bg" ng-if="key.type === 'image'" style="background-image:url('{{key.file_name_medium}}')"></div>
+                     <!--  <img ng-if="key.type === 'image'" ng-src="{{key.file_name_medium}}" > -->
+                        <div class="img-bg" ng-if="key.type === 'video'" style="background-image:url('https://i1.ytimg.com/vi/{{key.video_id}}/hqdefault.jpg')"></div> 
+                      <!-- <img ng-if="key.type === 'video'" ng-src="https://i1.ytimg.com/vi/{{key.video_id}}/hqdefault.jpg"> -->
+                      <div class="image-text">
+                        <h4>{{key.tag}}</h4>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+               <p ng-show="listLength() == 0">No results</p>
+            </section>
+
+
+    </div> 
+</div>      

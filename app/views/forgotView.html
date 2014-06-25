@@ -1,0 +1,29 @@
+<div class="row" id="top">
+	<div class="col-md-12">
+		<section class="login" ng-controller="forgotCtrl">
+			<h2>Reset password</h2>
+				<div class="row">
+					<span class="fa fa-question page-bg"></span>
+					<form class="form-forgot col-xs-12 col-sm-6 col-md-5" role="form" name="forgotForm" ng-submit="processForm(forgotForm.$valid)" novalidate ng-hide="forgotSuccessMessage">
+					     <div class="form-group"  ng-class="{ 'has-error' :submittedError}">
+         					<p class="help-block" style='height:20px'></p>
+        				</div>
+						<div class="form-group" ng-class="{ 'has-error' : forgotForm.email.$invalid && !forgotForm.email.$pristine || submittedError && forgotForm.email.$invalid && !forgotForm.email.$dirty }">
+							<label for="email" class="hidden">Email</label>
+							<input type="email" class="form-control" id="email" name="email" ng-model="email" ng-pattern="emailRegx" required>
+							<p ng-show="forgotForm.email.$error.required && !forgotForm.email.$pristine || submittedError && forgotForm.email.$invalid && !forgotForm.email.$dirty" class="help-block">Email is required</p>
+							<p ng-show="forgotForm.email.$error.pattern" class="help-block">Please input a valid email</p>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Reset password</button>
+						</div>
+						<div class="login-links">
+							<p>Already have an account? <a href="#!/login">Login</a></p>
+							<p>Don't have an account? <a href="#!/signup">Sign up</a></p>
+						</div>
+					</form>
+					<p class="col-xs-12 col-sm-6 col-md-5" ng-if="forgotSuccessMessage">{{forgotSuccessMessage}}</p>
+				</div>
+		</section>
+	</div> 
+</div>      

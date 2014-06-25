@@ -1,0 +1,25 @@
+[
+   {
+    "current": {
+        "id": "2",
+        "title": "Fluffy twins",
+        "type": "image",
+        "upload_datetime": "02/03/2014",
+        "userid": "Jo_Bloggs69",
+        "file_name": "public/img/cat1.jpg",
+        "description": "The domestic cat (Felis catus or Felis silvestris catus) is a small, usually furry, domesticated, and carnivorous mammal.",
+        "tags": ["cutest", "cats", "ragdoll", "kittens"]
+    },
+    "previous": {
+        "id": "1",
+        "type": "image",
+        "rating": 4,
+        "file_name": "public/img/cat2.jpg"
+    },
+    "next": {
+        "id": "3",
+        "type": "image",
+        "file_name": "public/img/cat3.jpg"
+        }
+    }
+]

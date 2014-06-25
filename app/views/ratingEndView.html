@@ -1,0 +1,141 @@
+  <div class="row">
+  <div class="col-md-12">
+     <ul class="nav nav-tabs" ng-controller="startRandomTagCtrl">
+      <li><a href="#!/" data-toggle="tab">Popular</a></li>
+      <li><a href="#!/recent" data-toggle="tab">Recent</a></li>
+      <li><a href="#!/random" data-toggle="tab">Random</a></li>
+      <li ng-if="getCurrentTag()" class="active"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
+      <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>   
+      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>      
+      </ul>
+  </div>
+</div>
+<br />
+<div class="clearfix"></div>
+
+<div class="row">
+<div class="col-xs-6 col-sm-3">
+  <section class="prev" ng-repeat="key in ratings" ng-hide="key.previous.id == null">
+    <h2 class="rating-header"><i class="fa fa-thumbs-up"></i> {{key.previous.overallScore}}</h2>
+    <div class="image-container">
+    <img ng-src="{{key.previous.file_name_medium}}" class="img-responsive" ng-if="key.previous.type === 'image'">
+    <img ng-src="https://i1.ytimg.com/vi/{{key.previous.original_file_name}}/hqdefault.jpg" class="img-responsive" ng-if="key.previous.type === 'video'">
+    <!-- <h2><span><i class="fa fa-thumbs-up"></i> {{key.previous.overallScore}}</span></h2> -->
+    </div>
+  </section>
+
+    <section class="home-popular-images" ng-controller="topCtrl">
+  <h2 class="rating-header"><i class="fa fa-trophy"></i> Top 3 in {{getPageTag() |  characters:10 :true }}</h2>
+        <ul class="tags" style="margin-left: 0">
+          <li ng-repeat="(key, value) in top | slice:0:3" >
+           <a href="#!/rate/tag/{{getPageTag()}}/{{value.id}}/{{value.id}}" class="bordered pull-left">
+            <div class="image-contain" > 
+                    <img ng-src="{{value.file_name_medium}}"  ng-if="value.type === 'image'" >
+                    <img ng-src="https://i1.ytimg.com/vi/{{value.original_file_name}}/hqdefault.jpg"  ng-if="value.type === 'video'">
+                    <div class="image-text">
+                    <h4>{{$index+1}}. {{value.title  | characters:17 :true}}</h4>
+                    <h5>{{value.userid}}</h5>
+                    </div>
+              </div>
+            </a>
+            <div class="side-top">
+            <span class="trophy ng-scope" ng-if="$index == 0 || $index == 1 || $index == 2" ng-class="{ 'top-one' : $index == 0, 'top-two' : $index == 1, 'top-three' : $index == 2 }"><i class="fa fa-trophy"></i></span>
+            <img gravatar-src="'{{value.gravatar}}'" class="profile-thumb-30" gravatar-size="30"> 
+            </div>
+          </li>
+        </ul> 
+        <p><a href="#!/top/{{getPageType()}}/{{getPageTag()}}" class="btn btn-sm btn-info"><span class="fa fa-heart"></span>&nbsp;Top 20 in {{getPageTag()}}</a></p>
+
+    </section>
+
+<!-- 
+  <section class="categories hidden-xs" ng-controller="tagPopularCtrl">
+    <h3><i class="glyphicon glyphicon-fire"></i> Popular tags</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+    <a href="#!/tagsearch">More...</a>
+  </section>
+
+
+    <section class="categories hidden-xs" ng-controller="tagRecentCtrl">
+      <h3><i class="glyphicon glyphicon-send"></i> Recent tags</h3>
+      <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+        <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+      </ul>
+      <a href="#!/tagsearch">More...</a>
+    </section>
+-->
+</div>
+
+<div class="col-xs-6 col-sm-3 col-sm-push-6" ng-repeat="key in ratings">
+  <section class="next">
+  <h2 class="rating-header">Next...</h2>
+  <div class="image-container">
+    <img ng-src="{{key.next.file_name_medium}}" class="img-responsive" ng-if="key.next.type === 'image'"  ng-hide="key.next.type === 'end'">
+    <img ng-src="https://i1.ytimg.com/vi/{{key.next.original_file_name}}/hqdefault.jpg" class="img-responsive" ng-if="key.next.type === 'video'"  ng-hide="key.next.type === 'end'">
+   <h2 class="next" ng-hide="key.next.type === 'end'"><span>{{key.randomTag}}</span></h2>
+    <img src="/public/img/end.png" class="img-responsive" ng-if="key.next.type === 'end'">
+    <h2 class="next" ng-if="key.next.type === 'end'"><span>No more in {{getPageTag()}}</span></h2>
+  </div>
+  </section>
+
+<!--
+        <section class="categories hidden-xs" ng-controller="tagPopularCtrl">
+    <h3><i class="fa fa-trophy"></i> Top 20 in</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud | orderBy:key.count:reverse" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/top/{{getPageType()}}/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+  </section> -->
+</div>
+
+<div class="col-xs-12 col-sm-6 col-sm-pull-3" ng-repeat="key in ratings">
+  <section class="current">
+  <a href="#!/upload" class="btn btn-xs btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;Upload</a>
+  <h2 class="rating-header"><i class="fa fa-tag"></i> {{getPage(3)}}</h2>
+        <img src="/public/img/end.png" class="img-responsive" >
+        <h3>No more in {{getPage(3)}}</h3>
+        <a href="#!/{{getPage(1)}}/{{getPage(2)}}/{{key.randomTag}}/{{key.next.id}}/{{key.next.id}}" id="goto" class="btn btn-primary" >Go to {{key.randomTag}}...</a>
+  </section>
+
+
+ <section class="home-popular" ng-controller="tagRandomCtrl">
+    <h3 class="home-page-h3">You might like these</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud" masonry="{'transitionDuration': 0}" column-width="1" >
+      <li ng-repeat="key in tagCloud.tagCloud | slice:0:8" class="masonry-brick"  style=" margin-bottom: -1px !important; ">
+        <a href="#!/rate/tag/{{key.tag}}/{{key.random_id}}/{{key.random_id}}" class="bordered">
+          <div class="image-contain"> 
+            <div class="img-size-xs" ng-if="key.type === 'image'" style="background-image:url('{{key.file_name_thumb}}')"></div>
+            <div class="img-size-xs" ng-if="key.type === 'video'" style="background-image:url('https://i1.ytimg.com/vi/{{key.video_id}}/default.jpg')"></div> 
+            <div class="image-text size-xs">
+              <h4 class="font-size-xs">{{key.tag}}</h4>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+      <a href="#!/tagsearch">More...</a>
+  </section>
+</div>
+
+<!-- 
+<div class="col-xs-12 visible-xs">
+  <section class="categories" ng-controller="tagPopularCtrl">
+    <h3><i class="glyphicon glyphicon-fire"></i> Popular tags</h3>
+    <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+      <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+    </ul>
+    <a href="#!/tagsearch">More...</a>
+  </section>
+
+    <section class="categories" ng-controller="tagRecentCtrl">
+      <h3><i class="glyphicon glyphicon-send"></i> Recent tags</h3>
+      <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud">
+        <li ng-repeat="key in tagCloud.tagCloud" class="{{roundTagColor(key.count,tagCloud.minCount,tagCloud.maxCount)}} grow"><a href="#!/rate/tag/{{key.tag}}"><span style="font-size:144%">{{key.tag}}</span></a></li>
+      </ul>
+      <a href="#!/tagsearch">More...</a>
+    </section>
+
+</div>
+-->
+</div>

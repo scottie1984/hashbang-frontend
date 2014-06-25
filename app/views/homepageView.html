@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-12">
+     <ul class="nav nav-tabs" ng-controller="startRandomTagCtrl">
+      <li class="active"><a href="#!/" data-toggle="tab">Popular</a></li>
+      <li><a href="#!/recent" data-toggle="tab">Recent</a></li>
+      <li><a href="#!/random" data-toggle="tab">Random</a></li>
+      <li ng-if="getCurrentTag()"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
+      <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>     
+      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>       
+      </ul>
+  </div>
+</div>
+
+ <div class="row">
+          <div class="col-md-12">
+           <section class="home-popular" ng-controller="tagPopularCtrl" >
+              <h3 class="home-page-h3">Popuar tags</h3>
+              <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud" masonry="{'transitionDuration': 0}" column-width="1" >
+                <li ng-repeat="key in tagCloud.tagCloud" class="masonry-brick {{imgSize(key.count,tagCloud.minCount,tagCloud.maxCount)}}"  style=" margin-bottom: -1px !important; ">
+                  <a href="#!/rate/tag/{{key.tag}}/{{key.random_id}}/{{key.random_id}}" class="bordered">
+                    <div class="image-contain"> 
+                      <div class="img-bg" ng-if="key.type === 'image'" style="background-image:url('{{key.file_name_medium}}')"></div>
+                      <div class="img-bg" ng-if="key.type === 'video'" style="background-image:url('https://i1.ytimg.com/vi/{{key.video_id}}/hqdefault.jpg')"></div> 
+                      <div class="image-text">
+                        <h4>{{key.tag}}</h4>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+                <a href="#!/tagsearch">More...</a>
+            </section>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+              <section class="home-popular-images" ng-controller="uploadsCtrl">
+              <h3 class="home-page-h3">Popular images</h3>
+                <ul class="tags" masonry="{'transitionDuration': 0}" column-width="1">
+                  <li ng-repeat="key in uploads" class="masonry-brick">
+                  <a href="#!/rate/tag/{{key.tags[0]}}/{{key.id}}/{{key.id}}" class="bordered">
+                  <div class="image-contain"> 
+                    <img ng-src="{{key.file_name_medium}}">
+                    <div class="image-text">
+                    <h4>{{key.title  | characters:17 :true}}</h4>
+                    <h5>{{key.userid}}</h5>
+                    </div>
+                  </div>
+                  </a></li>
+                </ul>
+              </section>  
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-md-12">
+            <section class="home-popular-videos" ng-controller="uploadsVideosCtrl">
+              <h3 class="home-page-h3">Popular videos</h3>
+              <ul class="tags" masonry="{'transitionDuration': 0}" column-width="1">
+                <li ng-repeat="key in uploadsVideo" class="masonry-brick">
+                <a href="#!/rate/tag/{{key.tags[0]}}/{{key.id}}/{{key.id}}" class="bordered">
+                <div class="image-contain"> 
+                <img ng-src="https://i1.ytimg.com/vi/{{key.original_file_name}}/hqdefault.jpg">
+                  <div class="image-text">
+                  <h4>{{key.title | characters:17 :true}}</h4>
+                  <h5>{{key.userid}}</h5>
+                  </div>
+                  </div>
+                </a>
+                </li>
+              </ul>
+            </section> 
+          </div>
+        </div>  
+         
+        <div class="row">
+          <div class="col-md-12">
+           <section class="home-from-users" ng-controller="userPopularCtrl">
+              <h3 class="home-page-h3">Popular Users</h3>
+              <ul class="tags" ng-repeat="(key, tagCloud) in tagCloud" masonry="{'transitionDuration': 0}" column-width="1">
+                <li ng-repeat="key in tagCloud.tagCloud" class="masonry-brick">
+                  <a href="#!/rate/user/{{key.tag}}" class="bordered">
+                    <div class="image-contain"> 
+                      <img gravatar-src="'{{key.gravatar}}'" class="profile-thumb" gravatar-size="100">
+                      <div class="image-text">
+                        <h4>{{key.tag | characters:17 :true}}</h4>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>  
+
+

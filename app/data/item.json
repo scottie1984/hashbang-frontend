@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "type": "image/jpeg",
+        "file_name": "http://localhost:9292/upload/1/download",
+        "userid": 1,
+        "upload_datetime": "2014-05-11 21:38:25 +0100",
+        "averageScore": 3.3,
+        "numOfRatings": 4,
+        "title": "ass",
+        "description": "dsdsd",
+        "tags": ["cat", "dog"]
+    }    
+]

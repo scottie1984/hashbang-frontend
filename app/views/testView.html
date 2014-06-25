@@ -1,0 +1,21 @@
+<div class="row">
+  	<div class="col-md-12" >
+   	 	<section class="upload">
+      		<h2>image crop demo</h2>
+      			<div class="row">
+	      			<div class="col-md-6">
+						<img-cropped src="assets/img/croptest.jpg" id="target" selected='selected(cords)' class="img-responsive"></img-cropped>
+					</div>
+					<div class="col-md-6">
+						<div id="cropped-image" ng-show="cropped" ng-style="{ width: picWidth + 'px', height: picHeight + 'px', overflow: 'hidden' }" >
+							<img id="preview" ng-src="assets/img/croptest.jpg" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row col-md-6" style="margin-top:30px">
+					<button id="crop" ng-click="getCoordinates()" class="btn btn-primary">Crop</button>
+				</div>
+		</section>
+	</div>
+</div>	

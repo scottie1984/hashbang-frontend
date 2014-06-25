@@ -1,0 +1,54 @@
+<div class="row" id="top">
+	<div class="col-md-12">
+		<section class="login" ng-controller="signupCtrl">
+			<h2>Sign up</h2>
+				<div class="row">
+					<span class="fa fa-pencil page-bg"></span>
+					<form class="form-signup col-xs-12 col-sm-6 col-md-5" role="form" name="signupForm" ng-submit="processForm(signupForm.$valid)" novalidate ng-hide="signupMessage">
+					     <div class="form-group"  ng-class="{ 'has-error' :submittedError}">
+         					<p class="help-block" style='height:20px'><span  ng-show="submittedError">Please correct your errors</span></p>
+        				</div>
+						<div class="form-group"  ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine || submittedError && signupForm.email.$invalid && !signupForm.email.$dirty || signupForm.email.$error.unique }">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" id="email" name="email" ng-model="email" ng-pattern="emailRegx" ensure-unique="email" required>
+							<p ng-show="signupForm.email.$error.required && !signupForm.email.$pristine || submittedError && signupForm.email.$invalid && !signupForm.email.$dirty" class="help-block">Email is required</p>
+							<p ng-show="signupForm.email.$error.pattern" class="help-block">Please input a valid email</p>
+							<p ng-show="signupForm.email.$error.unique" class="help-block">{{email}} is already registered, please try another</p>
+						</div>
+						<div class="form-group" ng-class="{ 'has-error' : signupForm.username.$invalid && !signupForm.username.$pristine || submittedError && signupForm.username.$invalid && !signupForm.username.$dirty || signupForm.username.$error.unique}">
+							<label for="username">Username</label>
+							<input type="username" class="form-control" name="username" id="username" ng-model="username" ensure-unique="username" ng-minlength="4" ng-maxlength="20" autocomplete="off" required>
+							<p ng-show="signupForm.username.$error.required && !signupForm.username.$pristine || submittedError && signupForm.username.$invalid && !signupForm.username.$dirty" class="help-block">Username is required</p>
+				            <p ng-show="signupForm.username.$error.minlength" class="help-block">Username is too short</p>
+				            <p ng-show="signupForm.username.$error.maxlength" class="help-block">Username is too long</p>
+				            <p ng-show="signupForm.username.$error.unique" class="help-block">{{username}} is already taken, please try another</p>
+						</div>
+						<div class="form-group" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine || submittedError && signupForm.password.$invalid && !signupForm.password.$dirty || errorMessagePassword}">
+							<label for="password">Password</label>
+							<input type="password" name="password" class="form-control" id="password" ng-model="user.password" ng-change="passwordStrength()" required>
+							<p class="help-block strength">Minium 6 characters. Use lowercase, uppercase and a digit.<br />Password strength: {{checkStrengthMessage}}</p>
+							<div class="progress">
+							  <div class="progress-bar progress-bar-{{strengthColor}}" role="progressbar" aria-valuenow="{{strengthValue}}" aria-valuemin="0" aria-valuemax="100" style="width: {{strengthValue}}%;"></div></div>
+
+							<p ng-show="signupForm.password.$error.required && !signupForm.password.$pristine || submittedError && signupForm.password.$invalid && !signupForm.password.$dirty" class="help-block">Password is required</p>
+							<p ng-show="errorMessagePassword" class="help-block">{{errorMessagePassword}}</p>
+						</div>
+						<div class="form-group" ng-class="{ 'has-error' : signupForm.passwordConfirm.$error.match || signupForm.passwordConfirm.$error.required && !signupForm.passwordConfirm.$pristine || submittedError && signupForm.passwordConfirm.$invalid && !signupForm.passwordConfirm.$dirty}">
+							<label for="passwordConfirm">Repeat password</label>
+							<input type="password" class="form-control" ng-model="user.passwordConfirm" data-match="user.password" name="passwordConfirm" required>
+							<p ng-show="signupForm.passwordConfirm.$error.match || signupForm.passwordConfirm.$error.required && !signupForm.passwordConfirm.$pristine || submittedError && signupForm.passwordConfirm.$invalid && !signupForm.passwordConfirm.$dirty" class="help-block">Password does not match</p>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+						</div>
+						<div class="login-links">
+							<p>Already have an account? <a href="#!/login">Login</a></p>
+						</div>
+					</form>
+					<p ng-if="signupMessage" class="col-xs-12 col-sm-6 col-md-5">
+						{{signupMessage}}
+					</p>
+				</div>
+		</section>
+	</div> 
+</div>      

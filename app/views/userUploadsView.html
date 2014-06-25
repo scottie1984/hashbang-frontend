@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-12">
+		<section class="user-uploads">
+			<h2>Uploads</h2>
+			<div class="row">
+					<ul>
+						<li ng-repeat="(key, value) in displayUpload">
+							<div class="col-sm-6 col-xs-12">
+			  					<section class="top">
+						          <div class="image-container">
+							            <img ng-src="{{value.file_name}}" class="img-rounded img-responsive" ng-if="value.type === 'image'">
+							            <youtube code="{{value.original_file_name}}" ng-if="value.type === 'video'"></youtube>
+						          </div>
+							  </section>
+							  			<a href="#!/upload" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Upload another</a>
+
+							</div>
+							<div class="col-sm-6 col-xs-12">
+			  					<section class="top">
+			  						<h3 class="leaderboard-title">{{value.title}}</h3>
+			  						<p>{{value.description}}</p>
+			  						<ul class="tags">
+		   								<li ng-repeat="(key, value) in value.tags"><a href="#!/rate/tag/{{value}}">{{value}}</a></li>
+		            				</ul>
+							  </section>
+							</div>
+						</li>
+					</ul>					
+				</div>
+		</section>
+
+	</div> 
+</div>      

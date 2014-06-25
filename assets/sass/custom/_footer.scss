@@ -1,0 +1,41 @@
+footer.footer{
+	background-color: #fff;
+	position: relative;
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+	clear:both;
+	padding-top:20px;
+
+	.footer-brand {
+
+	 	&:hover .logo-type{
+	  		color: #333;
+	  		-webkit-transition: 0.25s;
+			transition: 0.25s;
+		}
+		&:hover .logo-graphic{
+	  		background-color: #333;
+	  		-webkit-transition: 0.25s;
+			transition: 0.25s;
+	  	}
+
+		.logo-graphic{
+		  //display: inline-block;
+		  //border: solid 1px #333;
+		  //padding: 0 4px;
+		  background-color: $brand-primary;
+		  color: #fff;
+		  font-weight: bold;
+		  height:1.8em;
+		  margin-bottom: -10px;
+
+		}
+
+		.logo-type{
+		  margin: 0 10px;
+		  color: $brand-primary;
+
+		}
+
+	}
+}

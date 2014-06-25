@@ -1,0 +1,257 @@
+.rating-header{
+	font-size: 1.2em;
+	text-transform: capitalize;
+	font-weight: 100;
+	margin-top: 0;
+}
+.rating{
+
+	.glyphicon{
+		font-size: 3em;
+		padding: 0 2px;
+		cursor: pointer;
+		cursor: hand;
+		margin: 10px 0 20px 0;
+		color: $brand-primary;
+	}
+	i{
+		font-size: 2em;
+	}
+	.star-empty {
+		color: #B3B3B3 !important;
+	}
+	.rate-hint{
+		font-size: 16px;
+		color: #B3B3B3;
+	}
+}
+.ratingNum{
+	margin-top: 20px;
+	padding: 10px;
+	font-size: 2em;
+	clear: both;
+	display: inline-block;
+	width: 100%;
+}
+.image-container { 
+   position: relative; 
+   width: 100%; /* for IE 6 */
+
+   h2 { 
+	   position: absolute; 
+	   bottom: 0px; 
+	   width: 100%; 
+	   	padding: 4px 8px;
+	   //font-size: 1.2em;
+	  margin-left: -20px;
+	   span { 
+		   color: white; 
+		   font: bold .4em/1.8em $font-family-base; 
+		   //background: rgb(0, 0, 0); /* fallback color */
+		   //background: rgba(0, 0, 0, 0.7);
+		   background: $brand-primary;
+		   padding: 6px; 
+		   .spacer {
+			   padding:0 5px;
+			}
+		}
+	}
+	h2.next{	
+	  	right: 0; 
+	  	width: auto;
+	  	margin-right: -20px;
+	}
+}
+
+.tags{
+	list-style: none; 
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	
+	li{
+		display: inline-block;
+		margin: 0 4px 0 0;
+		a{
+			color: #fff;
+			font-weight: 100;
+		}
+	}
+	.label:hover{
+		background-color: $brand-secondary;
+	}
+}
+
+img.profileThumb{
+	float: left;
+	margin: 0 10px 0 0;
+	border-radius: 6px;
+}
+
+.caption{
+	h3{
+		font-size: 1em;
+		margin-top: 0;
+		font-weight: 100;
+	}
+	p{
+		font-size: 14px;
+		font-family: $font-family-base-light;
+	}
+	h4{
+		font-size: 1em;
+	}	
+}
+.categories{
+
+	h3{
+		font-size: 1.2em;
+		margin: 0;
+		font-weight: 100; 
+	}
+	.tags{
+		list-style: none; 
+		margin: 0;
+		padding: 0;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		
+		li{
+			//display: inline-block;
+			//background-color: $brand-primary;
+			background-color: $peter-river;
+			font-family: $font-family-base-light;
+			text-transform: capitalize;
+			//padding: .2em;
+			//line-height: 100%;
+			//font-size: .75em;
+			&:hover{
+				background-color: #333 !important;
+			}
+			a{
+				color: #fff;
+				font-size: .5em;
+				span{
+					display: -webkit-box;
+					line-height: .7em;
+					padding: 8px;
+				}
+			}
+		}
+
+		li.tag1{
+			background-color: darken($peter-river, 10%);
+		}
+		li.tag2{
+			background-color: darken($peter-river, 20%);
+		}
+		li.tag3{
+			background-color: darken($peter-river, 30%);
+		}
+		li.tag4{
+			background-color: darken($peter-river, 40%);
+		}
+	}
+}
+
+.categories.search-cloud .tags{
+	margin-left: -8px;
+}
+.categories.search-cloud .tags div{
+
+	margin:8px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
+
+
+}
+
+.categories.search-cloud .tags li a:hover .tag-text{
+	background-color: #333 !important;
+}
+
+.tag-text{
+	display: inline-block;
+	background-color: $peter-river;
+	transition: background-color 0.5s ease;
+}
+.categories.search-cloud .tags li{
+	background-color: transparent;		
+
+}
+.categories.search-cloud .tags div a div{
+	display: block;
+	padding:8px;
+	text-shadow: 10 1px 1px rgba(0, 0, 0, 0.02);
+	/*&:hover{
+		color: red;
+	}*/
+}
+
+.tag-list{
+	background-size: 100%; 
+	background-repeat: no-repeat;
+	background-position: 50%;
+}
+.tag-img{
+	display: block;
+	width: 92px;
+	height: 66px;
+}
+.masonry-brick {
+    margin: 8px !important;
+    display: none;
+}
+
+.masonry-brick.loaded {
+    display: block;
+}
+.tagSize1{
+	width: 92px; 
+	height: 66px;
+}
+.tagSize2{
+	width: 184px; 
+	height: 136px;
+}
+.tagSize3{
+	width: 230px;
+	height: 173px;
+}
+.tagSize4{
+	width: 300px;
+	height: 225px; 
+}
+
+.buttons{
+	margin-bottom: 30px;
+	margin-right: 30px;
+}
+
+section.prev,
+section.next,
+section.current,
+section.categories,
+section.top{
+	padding: 10px;
+	margin-bottom: 30px;
+	background-color: white;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.user-link{
+	font-size: .8em;
+	margin-top: 0px;
+	display: inline-block;
+}
+.currentTag{
+	position: absolute;
+	border-radius: 0;
+	margin: 14px 0 0 30px;
+	padding: 9px;
+	//margin-left: -11px;
+	font-size: 1.15em;
+}

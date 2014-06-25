@@ -1,0 +1,97 @@
+<div class="row" id="top">
+  <div class="col-md-12" >
+    <section class="upload">
+      <h2>Upload</h2>
+      <div class="row">
+        <span class="fa fa-cloud-upload page-bg"></span>
+        <form class="col-sm-6" role="form" name="uploadForm" ng-submit="processForm(uploadForm.$valid)" novalidate>  
+        <div class="form-group"  ng-class="{ 'has-error' :submittedError}">
+          <p class="help-block" style='height:20px'><span  ng-show="submittedError">Please correct your errors</span></p>
+        </div>     
+        <div class="form-group mediaType">
+          <div class="radio-mediaType">
+            <input id="image" type="radio" name="mediaType" ng-model="mediaType" value="image" ng-change="drawFields('image')">
+            <label for="image">Image</label>
+          </div>
+          <div class="radio-mediaType">
+            <input id="video" type="radio" name="mediaType" ng-model="mediaType" value="video" ng-change="drawFields('video')">
+            <label for="video">Video</label>
+          </div>
+        </div>
+        <div ng-hide="progressBar > 1">
+          <div class="form-group" ng-show="mediaType == 'image'" ng-class="{ 'has-error' : selectedFilesLengthCheck() > 1 ||  submittedError || submittedError && selectedFilesLengthCheck() === undefined}">
+            <label for="inputFile">Image</label>
+            <div>
+              <input type="hidden">
+              <span class="btn btn-primary btn-file">
+                  <i class="fa fa-search"></i>&nbsp;Browse<input id="file_upload" name="file" type="file" ng-file-select="onFileSelect($files)">
+              </span>
+              <span ng-show="selectedFiles != null" ng-hide="selectedFilesLengthCheck() > 1"><span class="uploaded-file-name">{{uploadFileName}}</span></span>
+              <p ng-show="checkFileType() === false" class="help-block">File type not supported</p>
+              <p ng-show="checkFileSize() === true" class="help-block">Max file size is {{getMaxFileSize}}</p>
+              <p ng-show="submittedError && selectedFilesLengthCheck() === undefined || selectedFilesLengthCheck() === 0" class="help-block">Select and image</p>
+              <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">or drop image here</div>
+              <div ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+
+              <loading></loading>
+              <div ng-show="selectedFiles != null">
+                <div class="sel-file" ng-repeat="f in selectedFiles">
+                 <img ng-hide="selectedFilesLengthCheck() > 1" ng-src="{{dataUrls[$index]}}" class="img-rounded img-responsive" id="target">                   
+                </div>
+                 <p ng-show="selectedFilesLengthCheck() > 1" class="help-block">Upload one image at a time</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="mediaType == 'video'" ng-class="{ 'has-error' : uploadForm.youtube.$invalid && !uploadForm.youtube.$pristine || submittedError && uploadForm.youtube.$invalid && !uploadForm.youtube.$dirty || youtubeError === true }">
+            <label for="youtube">Youtube video</label>
+            <input type="text" class="form-control" name="youtube" id="youtube" ng-model="youtube" ng-required="mediaType == 'video'" ng-blur="getYoutubeData(youtube)" placeholder="eg. https://www.youtube.com/watch?v=abcdefg">
+            <p ng-show="uploadForm.youtube.$error.required && !uploadForm.youtube.$pristine || submittedError && uploadForm.youtube.$invalid && !uploadForm.youtube.$dirty || youtubeError === true " class="help-block">Youtube video required</p>
+          </div>   
+
+          <div ng-show="mediaType == 'video'" ng-hide="youtubeError === true "><img ng-src="{{youtubeThumb}}" class="img-rounded img-responsive"  ng-href="{{youtubeThumb}}" ng-show="youtubeThumb"></div>
+
+
+          <div class="form-group"  ng-show="mediaType == 'video' || mediaType == 'image'" ng-class="{ 'has-error' : uploadForm.title.$invalid && !uploadForm.title.$pristine || submittedError && uploadForm.title.$invalid && !uploadForm.title.$dirty}">
+            <label for="title">Title</label>
+
+            <input type="text" class="form-control" name="title" id="title" ng-model="title"  ng-minlength="3" ng-maxlength="2000" autocomplete="off" required>
+            <p ng-show="uploadForm.title.$error.required && !uploadForm.title.$pristine || submittedError && uploadForm.title.$invalid && !uploadForm.title.$dirty" class="help-block">Title is required</p>
+            <p ng-show="uploadForm.title.$error.minlength" class="help-block">Title is too short</p>
+            <p ng-show="uploadForm.title.$error.maxlength" class="help-block">Title is too long</p>
+          </div>   
+
+          <div class="form-group" ng-show="mediaType == 'video' || mediaType == 'image'" ng-class="{ 'has-error' : tagLength() <= 2 && !uploadForm.tags.$pristine || submittedError && tagLength() <= 2 && !uploadForm.tags.$dirty || !uploadForm.tags.$valid || !uploadForm.tags.$error}">
+            <label for="tags" style="margin-bottom: -14px;">Tags</label>
+            <div>
+              <tags-input ng-model="tags" name="tags" id="tags" required  min-length="3" max-length="30"  max-tags="6" >
+                <auto-complete source="loadItems($query)" debounce-delay="0" ng-controller="tagCloudCtrl" ></auto-complete>
+              </tags-input>
+              <p ng-show="tagLength() <= 2 && !uploadForm.tags.$pristine || submittedError && tagLength() <= 2 && !uploadForm.tags.$dirty" class="help-block">At least one tag is required</p>
+              <p ng-show="uploadForm.tags.$error.maxTags" class="help-block">You have too many tags</p>
+              <p class="help-block help">Separate with commas or return.</p>     
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="mediaType == 'video' || mediaType == 'image'" ng-class="{ 'has-error' : uploadForm.description.$invalid }">
+            <label for="description">Description</label>
+            <textarea class="form-control" rows="6" id="description" name="description" ng-model="description" placeholder="Optional" ng-maxlength="5000"></textarea>
+            <p ng-show="uploadForm.description.$error.maxlength" class="help-block">Description is too long</p>
+          </div>
+
+          <button type="submit" ng-show="mediaType == 'video' || mediaType == 'image'" class="btn btn-primary btn-block">Upload</button>
+          </div>
+
+          <div class="sel-file" ng-show="progressBar > 0">
+              <h3 class="pull-left">Crunching...</h3><i class="fa fa-cog fa-spin" style="margin-top: 3em;"></i>
+              <div class="clearfix"></div>
+              <progressbar class="progress-striped active" value="progressBar" ></progressbar>
+          </div>
+
+        </form>
+      </div> 
+    </section>
+  </div>
+</div>
+
+

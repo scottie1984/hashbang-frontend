@@ -1,0 +1,26 @@
+.user-profile{
+	.user-trophies{
+		list-style-type: none;
+		margin-top: 1.5em;
+
+		.badge{
+			font-size: .6em;
+		}
+
+		li{
+			display: inline-block;
+			font-size: 2em;
+		}
+		.top-one{
+			color: #FFB415;
+		}
+		.top-two{
+			color: $silver;
+		}
+		.top-three{
+			color: #A78F31;
+		}
+
+	}
+
+}

@@ -1,0 +1,128 @@
+:after, :before, tags-input * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+tags-input .host {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+tags-input .host:active {
+    outline: 0;
+}
+tags-input .tags {
+    padding: 6px;
+    overflow: hidden;
+    word-wrap: break-word;
+    cursor: text;
+    background-color: #fff;
+    border:  2px solid #bdc3c7;
+    -webkit-appearance: none;
+	border-radius: 6px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+	transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+}
+tags-input .tags.focused {
+	border-color: $brand-secondary;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+tags-input .tags .tag-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+tags-input .tags .tag-item {
+    margin: 2px;
+    padding: 0 5px;
+    display: inline-block;
+    float: left;
+    font: 14px $font-family-base;
+    height: 26px;
+    line-height: 25px;
+    border: 0;
+    border-radius: 3px;
+    background: $brand-primary;
+    color: #fff;
+}
+tags-input .tags .tag-item.selected {
+    background: -webkit-linear-gradient(top, #febbbb 0, #fe9090 45%, #ff5c5c 100%);
+    background: linear-gradient(to bottom, #febbbb 0, #fe9090 45%, #ff5c5c 100%);
+}
+tags-input .tags .tag-item .remove-button {
+    margin: 0 0 0 5px;
+    padding: 0;
+    border: none;
+    background: 0 0;
+    cursor: pointer;
+    vertical-align: middle;
+    font: 700 16px Arial, sans-serif;
+    color: #FFF;
+}
+tags-input .tags .tag-item .remove-button:active {
+    color: red;
+}
+tags-input .tags .input {
+    border: 0;
+    outline: 0;
+    margin: 2px;
+    padding: 0;
+    padding-left: 5px;
+    float: left;
+    height: 26px;
+    font: 14px $font-family-base;
+}
+tags-input .tags .input.invalid-tag {
+    color: $text-color;
+}
+tags-input .tags .input::-ms-clear {
+    display: none;
+}
+tags-input.ng-invalid .tags {
+    //-webkit-box-shadow: 0 0 3px 1px rgba(255, 0, 0, .6);
+    //-moz-box-shadow: 0 0 3px 1px rgba(255, 0, 0, .6);
+    //box-shadow: 0 0 3px 1px rgba(255, 0, 0, .6);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+tags-input .autocomplete {
+    margin-top: -10px;
+    position: absolute;
+    padding: 5px 0;
+    z-index: 999;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+tags-input .autocomplete .suggestion-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+tags-input .autocomplete .suggestion-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font: normal 16px $font-family-base;
+    color: #000;
+    background-color: #fff;
+}
+tags-input .autocomplete .suggestion-item.selected, tags-input .autocomplete .suggestion-item.selected em {
+    color: #fff;
+    background-color: #0097cf;
+}
+tags-input .autocomplete .suggestion-item em {
+    font: bold 16px $font-family-base-bold;
+    color: #000;
+    background-color: #fff;
+}
