@@ -371,7 +371,7 @@ var forgotCtrl = function(a, b, c, d, e, f, g) {
 
 forgotCtrl.$inject = [ "$scope", "$location", "$http", "configService", "usernameService", "$timeout", "$anchorScroll" ];
 
-var forgotPasswordCtrl = function(a, b, c, d, e, f) {
+var forgotPasswordCtrl = function(a, b, c, d, e, f, g) {
     a.passwordStrength = function() {
         var b = {
             password: a.user.password
@@ -388,7 +388,7 @@ var forgotPasswordCtrl = function(a, b, c, d, e, f) {
         });
     }, a.getPageToken = function() {
         return b.path().split("/")[2] || "Unknown";
-    }, a.processForm = function(b) {
+    }, g.forgotToken = a.getPageToken(), a.processForm = function(b) {
         if (b) {
             console.log(a.user.password), console.log(a.user.passwordConfirm);
             var g = {
@@ -408,7 +408,7 @@ var forgotPasswordCtrl = function(a, b, c, d, e, f) {
                     "Content-Type": "application/x-www-form-urlencoded"
                 }
             }).success(function(b) {
-                console.log(b), "successfully changed password" !== b.status ? (e(function() {
+                "successfully changed password" !== b.status ? (e(function() {
                     a.errorMessagePassword = "";
                 }, 3500), a.errorMessagePassword = b.message) : a.resetPasswordMessage = "Success! Your password has been reset successfully.";
             }).error(function() {});
@@ -416,11 +416,11 @@ var forgotPasswordCtrl = function(a, b, c, d, e, f) {
     };
 };
 
-forgotPasswordCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$timeout", "$anchorScroll" ];
+forgotPasswordCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$timeout", "$anchorScroll", "$cookies" ];
 
-var loginCtrl = function(a, b, c, d, e, f, g) {
-    a.processForm = function(h) {
-        h ? c({
+var loginCtrl = function(a, b, c, d, e, f, g, h) {
+    a.processForm = function(i) {
+        i ? c({
             method: "POST",
             url: d.API_END_POINT + "auth/login",
             data: {
@@ -438,15 +438,15 @@ var loginCtrl = function(a, b, c, d, e, f, g) {
         }).success(function(c) {
             "Invalid username or password" === c.status ? (f(function() {
                 a.errorMessage = "";
-            }, 3500), a.errorMessage = c.status, g("top")) : (console.log(c.token), e.setUsername(c.username, c.id, c.token), 
-            b.path("/upload"));
+            }, 3500), a.errorMessage = c.status, g("top")) : (e.setUsername(c.username, c.id, c.token), 
+            b.path("#!/upload" === a.oldHash ? "/upload" : "#!/login" === a.oldHash || "#!/logout" === a.oldHash || "#!/signup" === a.oldHash || "#!/forgot" === a.oldHash || a.oldHash === "#!/forgot/" + h.forgotToken ? "/" : a.oldHash.replace("#!/", "/")));
         }).error(function(b) {
             a.errorMessage = b.status;
         }) : (a.submittedError = !0, g("top"));
     };
 };
 
-loginCtrl.$inject = [ "$scope", "$location", "$http", "configService", "usernameService", "$timeout", "$anchorScroll" ];
+loginCtrl.$inject = [ "$scope", "$location", "$http", "configService", "usernameService", "$timeout", "$anchorScroll", "$cookies" ];
 
 var logoutCtrl = function(a, b, c, d, e) {
     console.log(e.token()), console.log(a.token), c({
@@ -531,7 +531,9 @@ var mainCtrl = function(a, b, c, d, e, f, g, h, i) {
         var e, f = a.roundFontSize(b, c, d);
         return f > 100 && (e = "img-size-sm"), f > 200 && (e = "img-size-m"), f > 300 && (e = "img-size-m2"), 
         f > 400 && (e = "img-size-lg"), e;
-    };
+    }, a.$on("$locationChangeStart", function(b, c, e) {
+        a.oldUrl = e, a.oldHash = d.location.hash;
+    });
 };
 
 mainCtrl.$inject = [ "$scope", "$location", "$http", "$window", "$cookies", "$log", "configService", "usernameService", "md5" ];
