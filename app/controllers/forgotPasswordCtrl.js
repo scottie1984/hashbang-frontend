@@ -1,6 +1,6 @@
 /* jshint -W089 */
 
-var forgotPasswordCtrl = function ($scope, $location, $http, configService, $timeout, $anchorScroll) {
+var forgotPasswordCtrl = function ($scope, $location, $http, configService, $timeout, $anchorScroll, $cookies) {
 
     $scope.passwordStrength = function() {
         var postData = {
@@ -36,6 +36,8 @@ var forgotPasswordCtrl = function ($scope, $location, $http, configService, $tim
 		return $location.path().split('/')[2]||'Unknown';
     };
 	
+    $cookies.forgotToken = $scope.getPageToken();
+
 	//console.log($scope.getPageToken());
 
 
@@ -54,6 +56,8 @@ var forgotPasswordCtrl = function ($scope, $location, $http, configService, $tim
                 confirmPassword: $scope.user.passwordConfirm
             };
             
+
+
             $http({
                 method  : 'POST',
                 url     : configService.API_END_POINT+'auth/forgot-password/'  + $scope.getPageToken(),
@@ -70,7 +74,9 @@ var forgotPasswordCtrl = function ($scope, $location, $http, configService, $tim
             .success(function(data) {
                 //console.log(data.token);
                 //usernameService.setUsername(data.username, data.id, data.token);
-                console.log(data);
+
+                //console.log(data);
+
 
                 if (data.status !== 'successfully changed password'){
                     $timeout(function() {
@@ -96,4 +102,4 @@ var forgotPasswordCtrl = function ($scope, $location, $http, configService, $tim
     };
 };
 
-forgotPasswordCtrl.$inject = ['$scope', '$location', '$http', 'configService', '$timeout', '$anchorScroll'];
+forgotPasswordCtrl.$inject = ['$scope', '$location', '$http', 'configService', '$timeout', '$anchorScroll', '$cookies'];

@@ -1,6 +1,6 @@
 /* jshint -W089 */
 
-var loginCtrl = function ($scope, $location, $http, configService, usernameService, $timeout, $anchorScroll) {
+var loginCtrl = function ($scope, $location, $http, configService, usernameService, $timeout, $anchorScroll, $cookies) {
 
 
     $scope.processForm = function(isValid){
@@ -29,9 +29,24 @@ var loginCtrl = function ($scope, $location, $http, configService, usernameServi
                     $anchorScroll('top');
                     
                 } else{
-                    console.log(data.token);
+                    //console.log(data.token);
                     usernameService.setUsername(data.username, data.id, data.token);
-                    $location.path('/upload');
+                    //$location.path('/upload');
+                    
+                    //redirect to appropriate place
+                    if ($scope.oldHash === '#!/upload'){
+                        $location.path('/upload');
+                    } else if (
+                        $scope.oldHash === '#!/login'   ||
+                        $scope.oldHash === '#!/logout'  ||
+                        $scope.oldHash === '#!/signup'  ||
+                        $scope.oldHash === '#!/forgot'  ||
+                        $scope.oldHash === '#!/forgot/'+$cookies.forgotToken+''
+                        ){
+                        $location.path('/');
+                    } else {
+                        $location.path($scope.oldHash.replace('#!/','/'));
+                    }
                 }
 
             }).error(function(data) {
@@ -49,4 +64,4 @@ var loginCtrl = function ($scope, $location, $http, configService, usernameServi
 
 };
 
-loginCtrl.$inject = ['$scope', '$location', '$http', 'configService', 'usernameService', '$timeout', '$anchorScroll'];
+loginCtrl.$inject = ['$scope', '$location', '$http', 'configService', 'usernameService', '$timeout', '$anchorScroll', '$cookies'];

@@ -160,6 +160,13 @@ var mainCtrl = function ($scope, $location, $http, $window, $cookies, $log, conf
 		return size;
 	};
 
+	//get previous path
+    $scope.$on('$locationChangeStart', function (e, next, previous) {
+        $scope.oldUrl = previous;
+        $scope.oldHash = $window.location.hash;
+        //console.log($scope.oldHash);
+    });
+
 
 };
 
