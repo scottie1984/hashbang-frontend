@@ -810,7 +810,7 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
         }
     };
 } ]), app.service("configService", [ function() {
-    var a = "http://hashbangit.herokuapp.com/";
+    var a = "http://localhost:9292/";
     return {
         API_END_POINT: a
     };
