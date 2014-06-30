@@ -1,4 +1,4 @@
-var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "angularFileUpload", "ui.gravatar", "ngCookies", "wu.masonry", "truncate", "ngAnimate" ]).config([ "$routeProvider", "$locationProvider", "gravatarServiceProvider", function(a, b, c) {
+var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "angularFileUpload", "ui.gravatar", "ngCookies", "wu.masonry", "truncate", "ngAnimate", "angulartics", "angulartics.google.analytics" ]).config([ "$routeProvider", "$locationProvider", "$analyticsProvider", "gravatarServiceProvider", function(a, b, c) {
     a.when("/", {
         templateUrl: "app/views/homepageView.html"
     }).when("/random", {

@@ -9,11 +9,14 @@ var app = angular.module('app', [
 	'ngCookies',
     'wu.masonry',
     'truncate',
-    'ngAnimate'
+    'ngAnimate',
+	'angulartics',
+	'angulartics.google.analytics'
 ])
     .config([
         '$routeProvider',
         '$locationProvider',
+		'$analyticsProvider',
         'gravatarServiceProvider',
         
         function (

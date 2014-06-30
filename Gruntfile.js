@@ -75,6 +75,9 @@ module.exports = function(grunt) {
                         'assets/js/lib/angular-masonry.js',
                         'assets/js/lib/angular-truncate.js',
                         'assets/js/lib/angular-animate.min.js',
+						//angulatics modules
+						'assets/js/lib/angulartics-ga.js',
+						'assets/js/lib/angulartics.js',
                         //ui-bootstrap
                         'assets/js/ui-bootstrap/ui-bootstrap.js',
                         //flat ui
