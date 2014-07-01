@@ -693,6 +693,12 @@ var topCtrl = function(a, b, c) {
 
 topCtrl.$inject = [ "$scope", "topService", "$cookies" ];
 
+var userUploadsListCtrl = function(a, b) {
+    a.top = b.top, b.gettopData();
+};
+
+userUploadsListCtrl.$inject = [ "$scope", "userLeaderboardService", "$cookies" ];
+
 var uploadsCtrl = function(a, b) {
     b.getUploadsData("image", "popular", "all", "12").then(function(b) {
         a.uploads = b.data;
@@ -922,6 +928,17 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
 } ]), app.service("topService", [ "$http", "$location", "configService", function(a, b, c) {
     var d = [], e = function() {
         var e = b.path().split("/")[3] || "Unknown", f = c.API_END_POINT + "leaderboard/" + e + "/20";
+        a.get(f).then(function(a) {
+            angular.copy(a.data, d);
+        }, function() {});
+    };
+    return {
+        top: d,
+        gettopData: e
+    };
+} ]), app.service("userLeaderboardService", [ "$http", "$location", "configService", function(a, b, c) {
+    var d = [], e = function() {
+        var e = b.path().split("/")[1] || "Unknown", f = c.API_END_POINT + "leaderboard/" + e + "/1000";
         a.get(f).then(function(a) {
             angular.copy(a.data, d);
         }, function() {});

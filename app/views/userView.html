@@ -8,8 +8,36 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <br />
-    TO DO: show all users uploads, order by ranking, order by date (latest first), filter by type, with option to delete 
+    
+      <br />
+
+        <section class="leaderboard" ng-controller="userUploadsListCtrl">
+        <ul>
+          <li ng-repeat="(key, value) in top">
+              <section class="top top-image" ng-class="{ 'top-one' : $index == 0, 'top-two' : $index == 1, 'top-three' : $index == 2 }">
+              <span class="trophy" ng-if="$index == 0 || $index == 1 || $index == 2"><i class="fa fa-trophy"></i></span>
+              <div class="top-score-container hidden-sm hidden-xs">
+                <h2 class="top-score"><span>{{$index+1}}</span></h2>
+               </div>
+                <div class="image-container">
+                    <a href="#!/rate/tag/{{getPageTag()}}/{{value.id}}/{{value.id}}">
+                    <img alt="" ng-src="{{value.file_name_thumb}}" class="img-rounded" ng-if="value.type === 'image'" width="120" height="90">
+                    <img ng-src="https://i1.ytimg.com/vi/{{value.original_file_name}}/default.jpg" class="img-rounded topimg" ng-if="value.type === 'video'" width="120" height="90"></a>
+                  </div>
+                  <div class="top-details">
+                    <h3 class="leaderboard-title"><span class="visible-sm visible-xs sm-score">{{$index+1}}</span>{{value.title}}</h3>
+                    <h4><a href="#!/rate/user/{{value.userid}}">{{value.userid}}</a></h4>
+                    <p><i class="fa fa-thumbs-up"></i> <span id="upload_{{value.id}}">{{value.overallScore}}</span></p>
+                    <ul>
+                      <li ng-repeat="(i, o) in value.tags_with_rank track by i">{{i}} : {{o}}</li>
+                    </ul>  
+                  </div>
+            </section>
+          </li>
+        </ul>         
+    </section>
+
+
   </div>  
 </div>  
 

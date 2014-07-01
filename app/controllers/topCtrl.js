@@ -13,6 +13,16 @@ var topCtrl = function ($scope, topService, $cookies) {
 
 topCtrl.$inject = ['$scope', 'topService', '$cookies'];
 
+
+var userUploadsListCtrl = function ($scope, userLeaderboardService, $cookies) {
+
+    $scope.top = userLeaderboardService.top;
+    userLeaderboardService.gettopData();
+
+};
+
+userUploadsListCtrl.$inject = ['$scope', 'userLeaderboardService', '$cookies'];
+
 //reverse filter
 /*
 app.filter('reverse', function() {
