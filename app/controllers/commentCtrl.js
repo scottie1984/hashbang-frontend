@@ -14,7 +14,9 @@ var commentCtrl = function ($scope, $location, $http, commentService, $timeout, 
                 $scope.userComment = data[0]['comment'];
                 $scope.gravatarHash = data[0]['gravatar'];
                 $scope.userCommentTime = 'just now';
-                
+                    
+                console.log($scope.userComment);
+
                 $timeout(function() {
                     $scope.commentMessage = '';
                 }, 3500);
