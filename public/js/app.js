@@ -129,9 +129,10 @@ activateCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$sce"
 var commentCtrl = function(a, b, c, d, e, f, g) {
     a.submitComment = function(b, c, h) {
         b ? d.save(a.comment, h, g.token()).success(function(b) {
-            a.userTag = b[0][1], a.userComment = b[0][2], a.userCommentTime = "just now", e(function() {
+            a.userTag = b[0].username, a.userComment = b[0].comment, a.gravatarHash = b[0].gravatar, 
+            a.userCommentTime = "just now", console.log(a.userComment), e(function() {
                 a.commentMessage = "";
-            }, 3500), a.commentMessage = "Your comment is submitted", f.jQuery("ul.comment").prepend($('<li><div class="comment-avatar"><a href="#"><img src="http://www.gravatar.com/avatar/' + a.gravatarEmail + '?size=60&default=mm" class="profileThumb"></a></div><div class="comment-body"><div class="fa fa-play fa-flip-horizontal comment-triangle"></div><p>' + a.userComment + '</p></div><p class="comment-info pull-right"><a href="#">' + a.userTag + "</a> " + a.userCommentTime + "</p></li>").fadeIn("slow")), 
+            }, 3500), a.commentMessage = "Your comment is submitted", f.jQuery("ul.comment").prepend($('<li><div class="comment-avatar"><a href="#"><img src="http://www.gravatar.com/avatar/' + a.gravatarHash + '?size=60&default=mm" class="profileThumb"></a></div><div class="comment-body"><div class="fa fa-play fa-flip-horizontal comment-triangle"></div><p>' + a.userComment + '</p></div><p class="comment-info pull-right"><a href="#">' + a.userTag + "</a> " + a.userCommentTime + "</p></li>").fadeIn("slow")), 
             a.submittedError = !1, a.comment = "", a.commentForm.$setPristine();
         }).error(function(a) {
             console.log(a);

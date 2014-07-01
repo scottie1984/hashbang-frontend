@@ -10,18 +10,19 @@ var commentCtrl = function ($scope, $location, $http, commentService, $timeout, 
                 //$route.reload();
 
                 
-                $scope.userTag = data[0][1];
-                $scope.userComment = data[0][2];
+                $scope.userTag = data[0]['username'];
+                $scope.userComment = data[0]['comment'];
+                $scope.gravatarHash = data[0]['gravatar'];
                 $scope.userCommentTime = 'just now';
-                
+                    
+                console.log($scope.userComment);
+
                 $timeout(function() {
                     $scope.commentMessage = '';
                 }, 3500);
                 $scope.commentMessage = 'Your comment is submitted';
-                
-                //$window.jQuery('ul.comment').prepend('<li><div class="comment-avatar"><a href="#"><img src="http://www.gravatar.com/avatar/'+$scope.gravatarEmail+'?size=60&default=mm" class="profileThumb"></a></div><div class="comment-body"><div class="fa fa-play fa-flip-horizontal comment-triangle"></div><p>'+$scope.userComment+'</p></div><p class="comment-info pull-right"><a href="#">'+$scope.userTag+'</a> '+$scope.userCommentTime+'</p></li>').fadeIn('slow');
-
-                $window.jQuery('ul.comment').prepend($('<li><div class="comment-avatar"><a href="#"><img src="http://www.gravatar.com/avatar/'+$scope.gravatarEmail+'?size=60&default=mm" class="profileThumb"></a></div><div class="comment-body"><div class="fa fa-play fa-flip-horizontal comment-triangle"></div><p>'+$scope.userComment+'</p></div><p class="comment-info pull-right"><a href="#">'+$scope.userTag+'</a> '+$scope.userCommentTime+'</p></li>').fadeIn('slow'));
+                                
+                $window.jQuery('ul.comment').prepend($('<li><div class="comment-avatar"><a href="#"><img src="http://www.gravatar.com/avatar/'+$scope.gravatarHash+'?size=60&default=mm" class="profileThumb"></a></div><div class="comment-body"><div class="fa fa-play fa-flip-horizontal comment-triangle"></div><p>'+$scope.userComment+'</p></div><p class="comment-info pull-right"><a href="#">'+$scope.userTag+'</a> '+$scope.userCommentTime+'</p></li>').fadeIn('slow'));
 
                 $scope.submittedError = false;
 
