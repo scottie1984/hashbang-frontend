@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12">
+     <ul class="nav nav-tabs" ng-controller="startRandomTagCtrl">
+      <li><a href="#!/" data-toggle="tab">Popular</a></li>
+      <li><a href="#!/recent" data-toggle="tab">Recent</a></li>
+      <li><a href="#!/random" data-toggle="tab">Random</a></li>
+      <li ng-if="getCurrentTag()"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
+      <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>    
+      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>        
+      </ul>
+  </div>
+</div>
+<br />
+<div class="clearfix"></div>
+<div class="row" id="top">
+	<div class="col-md-12">
+		<section class="login" ng-controller="feedbackCtrl">
+			<h2>Tell us what you think</h2>
+				<div class="row">
+					<span class="fa fa-pencil page-bg"></span>
+					<form class="form-signup col-xs-12 col-sm-6 col-md-5" role="form" name="feedbackForm" ng-submit="processForm(feedbackForm.$valid)" novalidate ng-hide="message">
+						<div class="form-group" ng-class="{ 'has-error' : feedbackForm.feedback.$invalid && !feedbackForm.feedback.$pristine || submittedError && feedbackForm.feedback.$invalid && !feedbackForm.feedback.$dirty}">
+
+				        <textarea class="form-control" rows="4" id="feedback" name="feedback" ng-model="feedback" placeholder="Say what you have to say" ng-minlength="3" ng-maxlength="1000" required></textarea>
+
+				        <p ng-show="feedbackForm.feedback.$error.required && !feedbackForm.feedback.$pristine || submittedError && feedbackForm.feedback.$invalid && !feedbackForm.feedback.$dirty" class="help-block">Comment is required</p>
+				        <p ng-show="feedbackForm.feedback.$error.minlength" class="help-block">Comment is too short</p>
+				        <p ng-show="feedbackForm.feedback.$error.maxlength" class="help-block">Comment is too long</p>
+						<div class="form-group">
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Tell us</button>
+						</div>
+					</div>
+							
+					</form>
+					<p ng-if="message" class="col-xs-12 col-sm-6 col-md-5">
+						{{message}}
+					</p>
+				</div>
+		</section>
+	</div> 
+</div>      
