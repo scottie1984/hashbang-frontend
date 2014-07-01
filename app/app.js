@@ -65,6 +65,10 @@ var app = angular.module('app', [
                     templateUrl: 'app/views/uploadView.html',
                     controller: 'logoutCtrl'
                 })
+                .when('/feedback',{
+                    templateUrl: 'app/views/feedbackView.html',
+                    controller: 'feedbackCtrl'
+                })
                 .when('/signup',{
                     templateUrl: 'app/views/signupView.html',
                     controller: 'signupCtrl'

@@ -23,6 +23,9 @@ var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "ang
     }).when("/logout", {
         templateUrl: "app/views/uploadView.html",
         controller: "logoutCtrl"
+    }).when("/feedback", {
+        templateUrl: "app/views/feedbackView.html",
+        controller: "feedbackCtrl"
     }).when("/signup", {
         templateUrl: "app/views/signupView.html",
         controller: "signupCtrl"
@@ -181,6 +184,35 @@ endCtrl.$inject = [ "$scope", "$location", "$http", "endService", "configService
 var errorCtrl = function() {};
 
 errorCtrl.$inject = [ "$scope" ];
+
+var feedbackCtrl = function(a, b, c, d, e) {
+    a.processForm = function(b) {
+        if (b) {
+            console.log(a.feedback);
+            var f = {
+                feedback: a.feedback
+            };
+            c({
+                method: "POST",
+                url: d.API_END_POINT + "/feedback/add/",
+                data: f,
+                transformRequest: function(a) {
+                    var b = [];
+                    for (var c in a) b.push(encodeURIComponent(c) + "=" + encodeURIComponent(a[c]));
+                    return b.join("&");
+                },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }).success(function() {
+                a.message = e.trustAsHtml("Thanks for the feedback, we hope you continue using our site :)"), 
+                a.submittedError = !1;
+            });
+        } else a.submittedError = !0;
+    };
+};
+
+feedbackCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$sce" ];
 
 var fileUploadCtrl = function(a, b, c, d, e, f, g, h, i) {
     "use strict";
