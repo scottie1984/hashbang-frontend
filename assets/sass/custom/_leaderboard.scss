@@ -67,6 +67,7 @@
 	section.top.top-image{
 		//display: flex;
 		padding: 15px 0;
+		min-height: 120px;
 	}
 	section.top{
 		margin-bottom: 15px;
@@ -202,7 +203,29 @@
 
 }
 
+.user-upload-desc{
+	font-size: .8em;
+}
 
+.top-details .label{
+	font-family: ubuntu-light;
+	font-size: .7em;
+	margin: 0 8px;
+}	
+.close{
+	font-size: .8em;
+	margin-right:10px;
+	color: #000000;	
+	
+	&:hover{
+		cursor: hand;
+		cursor: pointer;
+	}		
+
+}
+.popover{
+	z-index:100000;
+}
 /*
 
 @media (max-width: $screen-md-min) { 
