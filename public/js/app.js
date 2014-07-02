@@ -503,7 +503,7 @@ var logoutCtrl = function(a, b, c, d, e) {
 
 logoutCtrl.$inject = [ "$scope", "$location", "$http", "configService", "usernameService" ];
 
-var mainCtrl = function(a, b, c, d, e, f, g, h, i) {
+var mainCtrl = function(a, b, c, d, e, f, g, h) {
     a.emailRegx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 
     a.getPage = function(a) {
         return b.path().split("/")[a];
@@ -536,7 +536,7 @@ var mainCtrl = function(a, b, c, d, e, f, g, h, i) {
             },
             url: g.API_END_POINT + "auth/get/" + b
         }).success(function(b) {
-            a.gravatarEmail = i(b.email);
+            a.gravatarEmail = b.gravatar;
         });
     }, a.$watch(function() {
         return e.username;
@@ -569,7 +569,7 @@ var mainCtrl = function(a, b, c, d, e, f, g, h, i) {
     });
 };
 
-mainCtrl.$inject = [ "$scope", "$location", "$http", "$window", "$cookies", "$log", "configService", "usernameService", "md5" ];
+mainCtrl.$inject = [ "$scope", "$location", "$http", "$window", "$cookies", "$log", "configService", "usernameService" ];
 
 var ratingCtrl = function(a, b, c, d, e, f, g, h, i, j, k) {
     d.getRatingData().then(function(b) {
