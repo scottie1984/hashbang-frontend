@@ -15906,10 +15906,10 @@ section.categories.cloud {
 
 /* line 247, ../../assets/sass/custom/_cloud.scss */
 .masonry-brick.loaded {
-  -webkit-transition: 0.4s linear all;
-  -moz-transition: 0.4s linear all;
-  -o-transition: 0.4s linear all;
-  transition: 0.4s linear all;
+  -webkit-transition: opacity 0.4s ease-in;
+  -moz-transition: opacity 0.4s ease-in;
+  -o-transition: opacity 0.4s ease-in;
+  transition: opacity 0.4s ease-in;
   opacity: 1;
 }
 

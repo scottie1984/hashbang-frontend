@@ -242,14 +242,14 @@ section.categories.cloud{
 
 
 .masonry-brick{
-	opacity:0
+	opacity:0;
 }
 .masonry-brick.loaded{
-	-webkit-transition:0.4s linear all;
-	-moz-transition:0.4s linear all;
-	-o-transition:0.4s linear all;
-	transition:0.4s linear all;
-	opacity:1
+	 -webkit-transition: opacity 0.4s ease-in;
+	 -moz-transition: opacity 0.4s ease-in;
+	 -o-transition: opacity 0.4s ease-in;
+	 transition: opacity 0.4s ease-in;
+	 opacity:1;
 }
 .search-results-tags,
 .home-popular{
