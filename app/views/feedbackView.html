@@ -6,7 +6,8 @@
       <li><a href="#!/random" data-toggle="tab">Random</a></li>
       <li ng-if="getCurrentTag()"><a href="#!/rate/tag/{{getCurrentTag()}}" data-toggle="tab">{{getCurrentTag()}}</a></li> 
       <li ng-if="getCurrentTag()"><a href="#!/top/tag/{{getCurrentTag()}}" data-toggle="tab">Top 20 in {{getCurrentTag()}}</a></li>    
-      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>        
+      <li><a href="#!/tagsearch" data-toggle="tab">Search</a></li>  
+      <li class="active"><a href="#!/feedback" data-toggle="tab">Feedback</a></li>        
       </ul>
   </div>
 </div>
@@ -16,8 +17,9 @@
 	<div class="col-md-12">
 		<section class="login" ng-controller="feedbackCtrl">
 			<h2>Tell us what you think</h2>
+			<br />
 				<div class="row">
-					<span class="fa fa-pencil page-bg"></span>
+					<span class="fa fa-bullhorn page-bg"></span>
 					<form class="form-signup col-xs-12 col-sm-6 col-md-5" role="form" name="feedbackForm" ng-submit="processForm(feedbackForm.$valid)" novalidate ng-hide="message">
 						<div class="form-group" ng-class="{ 'has-error' : feedbackForm.feedback.$invalid && !feedbackForm.feedback.$pristine || submittedError && feedbackForm.feedback.$invalid && !feedbackForm.feedback.$dirty}">
 
@@ -26,6 +28,7 @@
 				        <p ng-show="feedbackForm.feedback.$error.required && !feedbackForm.feedback.$pristine || submittedError && feedbackForm.feedback.$invalid && !feedbackForm.feedback.$dirty" class="help-block">Comment is required</p>
 				        <p ng-show="feedbackForm.feedback.$error.minlength" class="help-block">Comment is too short</p>
 				        <p ng-show="feedbackForm.feedback.$error.maxlength" class="help-block">Comment is too long</p>
+				        <br />
 						<div class="form-group">
 							<button class="btn btn-lg btn-primary btn-block" type="submit">Tell us</button>
 						</div>
