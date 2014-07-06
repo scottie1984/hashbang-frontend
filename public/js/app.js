@@ -172,7 +172,11 @@ var displayUploadCtrl = function(a, b) {
     a.displayUpload = b.displayUpload, b.getDisplayUploadData();
 };
 
-displayUploadCtrl.$inject = [ "$scope", "displayUploadService" ];
+displayUploadCtrl.$inject = [ "$scope", "displayUploadService" ], app.filter("reverse", function() {
+    return function(a) {
+        return a.slice().reverse();
+    };
+});
 
 var endCtrl = function(a, b, c, d) {
     d.getRatingData().then(function(b) {

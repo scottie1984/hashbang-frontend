@@ -13,7 +13,7 @@
 
         <section class="leaderboard" ng-controller="userUploadsListCtrl">
         <ul>
-          <li ng-repeat="(key, value) in top">
+          <li ng-repeat="(key, value) in top | reverse">
               <section class="top top-image" >
                 <button class="glyphicon glyphicon-remove pull-right close"></button>
                 <div class="image-container">
@@ -23,7 +23,7 @@
                   </div>
                   <div class="top-details">
                     <h3 class="leaderboard-title"><span class="visible-sm visible-xs sm-score">{{$index+1}}</span>{{value.title}}</h3>
-                      <p class="user-upload-desc" ng-if="!showDetails">{{value.description | characters:120 :true }}</p>
+                      <p class="user-upload-desc" ng-if="!showDetails">{{value.description | characters:140 :false }}</p>
                       <p><i class="fa fa-thumbs-up"></i> <span id="upload_{{value.id}}">{{value.overallScore}}</span>
                       <span class="label label-default" ng-repeat="(i, o) in value.tags_with_rank track by i">{{i}}: Rank {{o}}</span></p>
                   </div>
