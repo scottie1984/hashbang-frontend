@@ -17,7 +17,7 @@
               <section class="top top-image" >
                 <button class="glyphicon glyphicon-remove pull-right close"></button>
                 <div class="image-container">
-                    <a href="#!/rate/tag/{{getPageTag()}}/{{value.id}}/{{value.id}}">
+                    <a href="#!/rate/tag/{{value.tags[0]}}/{{value.id}}/{{value.id}}">
                     <img alt="" ng-src="{{value.file_name_thumb}}" class="img-rounded" ng-if="value.type === 'image'" width="120" height="90">
                     <img ng-src="https://i1.ytimg.com/vi/{{value.original_file_name}}/default.jpg" class="img-rounded topimg" ng-if="value.type === 'video'" width="120" height="90"></a>
                   </div>
