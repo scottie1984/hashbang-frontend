@@ -1,64 +1,84 @@
 var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "angularFileUpload", "ui.gravatar", "ngCookies", "wu.masonry", "truncate", "ngAnimate", "angulartics", "angulartics.google.analytics" ]).config([ "$routeProvider", "$locationProvider", "$analyticsProvider", "gravatarServiceProvider", function(a, b, c) {
     a.when("/", {
-        templateUrl: "app/views/homepageView.html"
+        templateUrl: "app/views/homepageView.html",
+        title: "Home"
     }).when("/random", {
-        templateUrl: "app/views/homepageRandom.html"
+        templateUrl: "app/views/homepageRandom.html",
+        title: "Random"
     }).when("/recent", {
-        templateUrl: "app/views/homepageRecent.html"
+        templateUrl: "app/views/homepageRecent.html",
+        title: "Recent"
     }).when("/rate/:type/:tag/:id/:prevId", {
         templateUrl: "app/views/ratingView.html",
-        controller: "ratingCtrl"
+        controller: "ratingCtrl",
+        title: "Rate"
     }).when("/rate/:type/:tag", {
         templateUrl: "app/views/ratingView.html",
-        controller: "ratingCtrl"
+        controller: "ratingCtrl",
+        title: "Rate"
     }).when("/rate/:type/:tag/end/:prevId/:prevId", {
         templateUrl: "app/views/ratingEndView.html",
-        controller: "endCtrl"
+        controller: "endCtrl",
+        title: "Rate"
     }).when("/tagsearch", {
         templateUrl: "app/views/tagSearchView.html",
-        controller: "tagSearchCtrl"
+        controller: "tagSearchCtrl",
+        title: "Search"
     }).when("/login", {
         templateUrl: "app/views/loginView.html",
-        controller: "loginCtrl"
+        controller: "loginCtrl",
+        title: "Login"
     }).when("/logout", {
         templateUrl: "app/views/uploadView.html",
-        controller: "logoutCtrl"
+        controller: "logoutCtrl",
+        title: "Logout"
     }).when("/feedback", {
         templateUrl: "app/views/feedbackView.html",
-        controller: "feedbackCtrl"
+        controller: "feedbackCtrl",
+        title: "Feedback"
     }).when("/signup", {
         templateUrl: "app/views/signupView.html",
-        controller: "signupCtrl"
+        controller: "signupCtrl",
+        title: "Sign up"
     }).when("/forgot/:token", {
         templateUrl: "app/views/forgotPassword.html",
-        controller: "forgotPasswordCtrl"
+        controller: "forgotPasswordCtrl",
+        title: "Forgot"
     }).when("/forgot", {
         templateUrl: "app/views/forgotView.html",
-        controller: "forgotCtrl"
+        controller: "forgotCtrl",
+        title: "Forgot"
     }).when("/upload", {
         templateUrl: "app/views/uploadView.html",
-        controller: "fileUploadCtrl"
+        controller: "fileUploadCtrl",
+        title: "Upload"
     }).when("/top/:type/:tag", {
         templateUrl: "app/views/topView.html",
-        controller: "topCtrl"
+        controller: "topCtrl",
+        title: "Top 20"
     }).when("/:userName/uploads/:uploadId", {
         templateUrl: "app/views/userUploadsView.html",
-        controller: "displayUploadCtrl"
+        controller: "displayUploadCtrl",
+        title: "Upload"
     }).when("/:userName", {
         templateUrl: "app/views/userView.html",
-        controller: "userCtrl"
+        controller: "userCtrl",
+        title: "My uploads"
     }).when("/:userName/edit", {
         templateUrl: "app/views/userEditView.html",
-        controller: "userEditCtrl"
+        controller: "userEditCtrl",
+        title: "Edit my profile"
     }).when("/user/:token", {
         templateUrl: "app/views/activateView.html",
-        controller: "activateCtrl"
+        controller: "activateCtrl",
+        title: "Activate my account"
     }).when("/croptest", {
         templateUrl: "app/views/testView.html",
         controller: "cropCtrl"
     }).when("/404", {
         templateUrl: "app/views/404View.html",
-        controller: "errorCtrl"
+        controller: "errorCtrl",
+        title: "Page not found"
     }).otherwise({
         redirectTo: "/404"
     }), b.html5Mode(!1).hashPrefix("!"), c.defaults = {
@@ -503,9 +523,11 @@ var logoutCtrl = function(a, b, c, d, e) {
 
 logoutCtrl.$inject = [ "$scope", "$location", "$http", "configService", "usernameService" ];
 
-var mainCtrl = function(a, b, c, d, e, f, g, h) {
+var mainCtrl = function(a, b, c, d, e, f, g, h, i, j) {
     a.emailRegx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 
-    a.getPage = function(a) {
+    i.$on("$routeChangeSuccess", function() {
+        i.pageTitle = j.current.title, i.pageTitleTag = b.path().split("/")[3];
+    }), a.getPage = function(a) {
         return b.path().split("/")[a];
     }, a.getPageTag = function() {
         return b.path().split("/")[3] || "Unknown";
@@ -569,7 +591,7 @@ var mainCtrl = function(a, b, c, d, e, f, g, h) {
     });
 };
 
-mainCtrl.$inject = [ "$scope", "$location", "$http", "$window", "$cookies", "$log", "configService", "usernameService" ];
+mainCtrl.$inject = [ "$scope", "$location", "$http", "$window", "$cookies", "$log", "configService", "usernameService", "$rootScope", "$route" ];
 
 var ratingCtrl = function(a, b, c, d, e, f, g, h, i, j, k) {
     d.getRatingData().then(function(b) {
@@ -740,9 +762,7 @@ var userUploadsListCtrl = function(a, b, c, d, e, f) {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
-        }).success(function(a) {
-            console.log(a);
-        });
+        }).success(function() {});
     };
 };
 

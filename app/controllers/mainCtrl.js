@@ -1,10 +1,16 @@
 /* jshint -W117 */
 /* jshint -W065 */
 
-var mainCtrl = function ($scope, $location, $http, $window, $cookies, $log, configService, usernameService) {
+var mainCtrl = function ($scope, $location, $http, $window, $cookies, $log, configService, usernameService, $rootScope, $route) {
 	//email regex
 	$scope.emailRegx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
+	//pagetitle
+	$rootScope.$on('$routeChangeSuccess', function(event, current, previous){
+		$rootScope.pageTitle = $route.current.title;
+		$rootScope.pageTitleTag = $location.path().split('/')[3];
+	});
+
 	//generic get page
 	$scope.getPage = function(page){
 		return $location.path().split('/')[page];
@@ -170,4 +176,4 @@ var mainCtrl = function ($scope, $location, $http, $window, $cookies, $log, conf
 
 };
 
-mainCtrl.$inject = ['$scope', '$location', '$http', '$window', '$cookies','$log', 'configService', 'usernameService'];
+mainCtrl.$inject = ['$scope', '$location', '$http', '$window', '$cookies','$log', 'configService', 'usernameService', '$rootScope', '$route'];

@@ -28,82 +28,101 @@ var app = angular.module('app', [
             $routeProvider
                 .when('/',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageView.html'
+                    templateUrl: 'app/views/homepageView.html',
+                    title: 'Home'
                     //controller: 'homepageCtrl'
                 })
                 .when('/random',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageRandom.html'
+                    templateUrl: 'app/views/homepageRandom.html',
+                    title: 'Random'
                     //controller: 'homepageCtrl'
                 })
                 .when('/recent',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageRecent.html'
+                    templateUrl: 'app/views/homepageRecent.html',
+                    title: 'Recent'
                     //controller: 'homepageCtrl'
                 })
                 .when('/rate/:type/:tag/:id/:prevId',{
                     templateUrl: 'app/views/ratingView.html',
-                    controller: 'ratingCtrl'
+                    controller: 'ratingCtrl',
+                    title: 'Rate'
                 })
                 .when('/rate/:type/:tag',{
                     templateUrl: 'app/views/ratingView.html',
-                    controller: 'ratingCtrl'
+                    controller: 'ratingCtrl',
+                    title: 'Rate'
                 })
                 .when('/rate/:type/:tag/end/:prevId/:prevId',{
                     templateUrl: 'app/views/ratingEndView.html',
-                    controller: 'endCtrl'
+                    controller: 'endCtrl',
+                    title: 'Rate'
                 })
                 .when('/tagsearch',{
                     templateUrl: 'app/views/tagSearchView.html',
-                    controller: 'tagSearchCtrl'
+                    controller: 'tagSearchCtrl',
+                    title: 'Search'
                 })
                 .when('/login',{
                     templateUrl: 'app/views/loginView.html',
-                    controller: 'loginCtrl'
+                    controller: 'loginCtrl',
+                    title: 'Login'
                 })
                 .when('/logout',{
                     templateUrl: 'app/views/uploadView.html',
-                    controller: 'logoutCtrl'
+                    controller: 'logoutCtrl',
+                    title: 'Logout'
                 })
                 .when('/feedback',{
                     templateUrl: 'app/views/feedbackView.html',
-                    controller: 'feedbackCtrl'
+                    controller: 'feedbackCtrl',
+                    title: 'Feedback'
                 })
                 .when('/signup',{
                     templateUrl: 'app/views/signupView.html',
-                    controller: 'signupCtrl'
+                    controller: 'signupCtrl',
+                    title: 'Sign up'
                 })
                 .when('/forgot/:token',{
                     templateUrl: 'app/views/forgotPassword.html',
-                    controller: 'forgotPasswordCtrl'
+                    controller: 'forgotPasswordCtrl',
+                    title: 'Forgot'
                 })
                 .when('/forgot',{
                     templateUrl: 'app/views/forgotView.html',
-                    controller: 'forgotCtrl'
+                    controller: 'forgotCtrl',
+                    title: 'Forgot'
                 })
                 .when('/upload',{
                     templateUrl: 'app/views/uploadView.html',
-                    controller: 'fileUploadCtrl'
+                    controller: 'fileUploadCtrl',
+                    title: 'Upload'
                 })
                 .when('/top/:type/:tag',{
                     templateUrl: 'app/views/topView.html',
-                    controller: 'topCtrl'
+                    controller: 'topCtrl',
+                    title: 'Top 20'
                 })
                 .when('/:userName/uploads/:uploadId',{
                     templateUrl: 'app/views/userUploadsView.html',
-                    controller: 'displayUploadCtrl'
+                    controller: 'displayUploadCtrl',
+                    title: 'Upload'
                 })
                 .when('/:userName',{
                     templateUrl: 'app/views/userView.html',
-                    controller: 'userCtrl'
+                    controller: 'userCtrl',
+                    title: 'My uploads'
                 })
                 .when('/:userName/edit',{
                     templateUrl: 'app/views/userEditView.html',
-                    controller: 'userEditCtrl'
+                    controller: 'userEditCtrl',
+                    title: 'Edit my profile'
                 })
                 .when('/user/:token',{
                     templateUrl: 'app/views/activateView.html',
-                    controller: 'activateCtrl'
+                    controller: 'activateCtrl',
+                    title: 'Activate my account'
                 })
                 .when('/croptest',{
                     templateUrl: 'app/views/testView.html',
@@ -111,7 +130,8 @@ var app = angular.module('app', [
                 })
                 .when('/404',{
                     templateUrl: 'app/views/404View.html',
-                    controller: 'errorCtrl'
+                    controller: 'errorCtrl',
+                    title: 'Page not found'
                 })
                 .otherwise({'redirectTo': '/404'
                 });
@@ -119,6 +139,8 @@ var app = angular.module('app', [
             $locationProvider
             .html5Mode(false)
             .hashPrefix('!');
+
+
 
             gravatarServiceProvider.defaults = {
                 size     : 80,
