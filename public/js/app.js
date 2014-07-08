@@ -172,11 +172,7 @@ var displayUploadCtrl = function(a, b) {
     a.displayUpload = b.displayUpload, b.getDisplayUploadData();
 };
 
-displayUploadCtrl.$inject = [ "$scope", "displayUploadService" ], app.filter("reverse", function() {
-    return function(a) {
-        return a.slice().reverse();
-    };
-});
+displayUploadCtrl.$inject = [ "$scope", "displayUploadService" ];
 
 var endCtrl = function(a, b, c, d) {
     d.getRatingData().then(function(b) {
@@ -722,18 +718,40 @@ var tagSearchCtrl = function(a, b) {
 tagSearchCtrl.$inject = [ "$scope", "tagSearchService" ];
 
 var topCtrl = function(a, b, c) {
-    a.top = b.top, b.gettopData(), a.reverseIndex = function(a, b) {
-        return b - a + 1;
-    }, c.currentTag = a.getPageTag();
+    a.top = b.top, b.gettopData(), c.currentTag = a.getPageTag();
 };
 
 topCtrl.$inject = [ "$scope", "topService", "$cookies" ];
 
-var userUploadsListCtrl = function(a, b) {
-    a.top = b.top, b.gettopData();
+var userUploadsListCtrl = function(a, b, c, d, e, f) {
+    a.top = b.top, b.gettopData(), a.deleteItem = function(b, c) {
+        var g = a.top.length - (b + 1);
+        a.top.splice(g, 1), f({
+            method: "POST",
+            url: e.API_END_POINT + "/upload/delete/" + c,
+            data: {
+                usertoken: d.token()
+            },
+            transformRequest: function(a) {
+                var b = [];
+                for (var c in a) b.push(encodeURIComponent(c) + "=" + encodeURIComponent(a[c]));
+                return b.join("&");
+            },
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).success(function(a) {
+            console.log(a);
+        });
+    };
 };
 
-userUploadsListCtrl.$inject = [ "$scope", "userLeaderboardService", "$cookies" ];
+userUploadsListCtrl.$inject = [ "$scope", "userLeaderboardService", "$cookies", "usernameService", "configService", "$http" ], 
+app.filter("reverse", function() {
+    return function(a) {
+        return a.slice().reverse();
+    };
+});
 
 var uploadsCtrl = function(a, b) {
     b.getUploadsData("image", "popular", "all", "12").then(function(b) {
@@ -856,6 +874,33 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
     var a = "http://hashbangit.herokuapp.com/";
     return {
         API_END_POINT: a
+    };
+} ]), app.service("dialogModal", [ "$modal", function(a) {
+    return function(b, c, d, e) {
+        d = d === !1 ? !1 : d || "Confirm", e = e === !1 ? !1 : e || "Cancel";
+        var f = function(a, b, c) {
+            angular.extend(a, c), a.ok = function() {
+                b.close(!0);
+            }, a.cancel = function() {
+                b.dismiss("cancel");
+            };
+        };
+        f.$inject = [ "$scope", "$modalInstance", "settings" ];
+        var g = a.open({
+            template: '<div class="dialog-modal"><div class="modal-header" ng-show="modalTitle"><h3 class="modal-title">{{modalTitle}}</h3></div><div class="modal-body">{{modalBody}}</div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()" ng-show="okButton">{{okButton}}</button><button class="btn btn-default" ng-click="cancel()" ng-show="cancelButton">{{cancelButton}}</button></div></div>',
+            controller: f,
+            resolve: {
+                settings: function() {
+                    return {
+                        modalTitle: c,
+                        modalBody: b,
+                        okButton: d,
+                        cancelButton: e
+                    };
+                }
+            }
+        });
+        return g;
     };
 } ]), app.service("displayUploadService", [ "$http", "$location", "configService", function(a, b, c) {
     var d = [], e = function() {
@@ -1059,6 +1104,18 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
         },
         setUsername: function(b, c, d) {
             a.username = b, a.id = c, a.token = d;
+        }
+    };
+} ]), app.directive("confirmClick", [ "$q", "dialogModal", function(a, b) {
+    return {
+        link: function(a, c, d) {
+            var e = d.ngClick.replace("confirmClick()", "true").replace("confirmClick(", "confirmClick(true,");
+            a.confirmClick = function(c) {
+                return c === !0 ? !0 : (c = c || d.confirmClick || "Are you sure you want to delete this?", 
+                b(c).result.then(function() {
+                    a.$eval(e);
+                }), !1);
+            };
         }
     };
 } ]), app.directive("ensureUnique", [ "$http", "configService", function(a, b) {

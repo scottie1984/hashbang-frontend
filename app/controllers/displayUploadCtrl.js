@@ -5,10 +5,3 @@ var displayUploadCtrl = function ($scope, displayUploadService) {
 };
 
 displayUploadCtrl.$inject = ['$scope', 'displayUploadService'];
-
-//reverse filter
-app.filter('reverse', function() {
-    return function(items) {
-        return items.slice().reverse();
-    };
-});

@@ -12,10 +12,10 @@
       <br />
 
         <section class="leaderboard" ng-controller="userUploadsListCtrl">
-        <ul>
+        <ul id="userUploadList">
           <li ng-repeat="(key, value) in top | reverse">
               <section class="top top-image" >
-                <button class="glyphicon glyphicon-remove pull-right close"></button>
+                <button class="glyphicon glyphicon-remove pull-right close"  ng-click="confirmClick() && deleteItem($index, value.id)" confirm-click></button>
                 <div class="image-container">
                     <a href="#!/rate/tag/{{value.tags[0]}}/{{value.id}}/{{value.id}}">
                     <img alt="" ng-src="{{value.file_name_thumb}}" class="img-rounded" ng-if="value.type === 'image'" width="120" height="90">
