@@ -1,12 +1,12 @@
 /* jshint -W089 */
 
-var activateCtrl = function ($scope, $location, $http, configService, $sce) {
+var activateCtrl = function ($scope, $location, $http, configService, $sce, $cookies) {
 	
 	$scope.getPageToken = function() {
 		return $location.path().split('/')[2]||'Unknown';
     };
 	
-	console.log($scope.getPageToken());
+	$cookies.pageToken = $scope.getPageToken();
 	
 	$http({
         method  : 'POST',
@@ -33,10 +33,10 @@ var activateCtrl = function ($scope, $location, $http, configService, $sce) {
 			$scope.message =  $sce.trustAsHtml('Congratulations, <a href="#!/login">please login</a> to start uploading content');
 		}
 				
-		//$location.path('/login');
+		//$location.path('/');
     });
 
 
 };
 
-activateCtrl.$inject = ['$scope', '$location', '$http', 'configService', '$sce'];
+activateCtrl.$inject = ['$scope', '$location', '$http', 'configService', '$sce', '$cookies'];

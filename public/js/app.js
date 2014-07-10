@@ -123,10 +123,10 @@ var ModalInstanceCtrl = function(a, b) {
 
 ModalInstanceCtrl.$inject = [ "$scope", "$modalInstance" ];
 
-var activateCtrl = function(a, b, c, d, e) {
+var activateCtrl = function(a, b, c, d, e, f) {
     a.getPageToken = function() {
         return b.path().split("/")[2] || "Unknown";
-    }, console.log(a.getPageToken()), c({
+    }, f.pageToken = a.getPageToken(), c({
         method: "POST",
         url: d.API_END_POINT + "/auth/activate/" + a.getPageToken(),
         data: {},
@@ -144,7 +144,7 @@ var activateCtrl = function(a, b, c, d, e) {
     });
 };
 
-activateCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$sce" ];
+activateCtrl.$inject = [ "$scope", "$location", "$http", "configService", "$sce", "$cookies" ];
 
 var commentCtrl = function(a, b, c, d, e, f, g) {
     a.submitComment = function(b, c, h) {
@@ -492,7 +492,7 @@ var loginCtrl = function(a, b, c, d, e, f, g, h) {
             "Invalid username or password" === c.status ? (f(function() {
                 a.errorMessage = "";
             }, 3500), a.errorMessage = c.status, g("top")) : (e.setUsername(c.username, c.id, c.token), 
-            b.path("#!/upload" === a.oldHash ? "/upload" : "#!/login" === a.oldHash || "#!/logout" === a.oldHash || "#!/signup" === a.oldHash || "#!/forgot" === a.oldHash || a.oldHash === "#!/forgot/" + h.forgotToken ? "/" : a.oldHash.replace("#!/", "/")));
+            b.path("#!/upload" === a.oldHash ? "/upload" : "#!/login" === a.oldHash || "#!/logout" === a.oldHash || "#!/signup" === a.oldHash || "#!/forgot" === a.oldHash || a.oldHash === "#!/forgot/" + h.forgotToken || a.oldHash === "#!/user/" + h.pageToken ? "/" : a.oldHash.replace("#!/", "/")));
         }).error(function(b) {
             a.errorMessage = b.status;
         }) : (a.submittedError = !0, g("top"));

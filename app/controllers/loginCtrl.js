@@ -2,7 +2,6 @@
 
 var loginCtrl = function ($scope, $location, $http, configService, usernameService, $timeout, $anchorScroll, $cookies) {
 
-
     $scope.processForm = function(isValid){
         if (isValid){
 
@@ -41,7 +40,8 @@ var loginCtrl = function ($scope, $location, $http, configService, usernameServi
                         $scope.oldHash === '#!/logout'  ||
                         $scope.oldHash === '#!/signup'  ||
                         $scope.oldHash === '#!/forgot'  ||
-                        $scope.oldHash === '#!/forgot/'+$cookies.forgotToken+''
+                        $scope.oldHash === '#!/forgot/'+$cookies.forgotToken+'' ||
+                        $scope.oldHash === '#!/user/'+$cookies.pageToken+''
                         ){
                         $location.path('/');
                     } else {
