@@ -21,7 +21,7 @@
         </div>
         <div collapse="isCollapsed" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ng-if="isUserLogged"><a href="#!/{{isUserLogged}}"><img ng-if="gravatarEmail" gravatar-src="'{{gravatarEmail}}'" class="profileThumb" gravatar-size="24">{{isUserLogged}}</a></li>
+            <li ng-if="isUserLogged"><a href="#!/username/{{isUserLogged}}"><img ng-if="gravatarEmail" gravatar-src="'{{gravatarEmail}}'" class="profileThumb" gravatar-size="24">{{isUserLogged}}</a></li>
             <li ng-if="!isUserLogged"><a href="#!/signup">Sign up</a></li>
             <li ng-if="!isUserLogged"><a href="#!/login">Login</a></li>
             <li><a href="#!/upload">Upload</a></li>

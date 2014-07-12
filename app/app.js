@@ -32,6 +32,11 @@ var app = angular.module('app', [
                     title: 'Home'
                     //controller: 'homepageCtrl'
                 })
+                .when('/404',{
+                    templateUrl: 'app/views/404View.html',
+                    controller: 'errorCtrl',
+                    title: 'Page not found'
+                })
                 .when('/random',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
                     templateUrl: 'app/views/homepageRandom.html',
@@ -104,17 +109,17 @@ var app = angular.module('app', [
                     controller: 'topCtrl',
                     title: 'Top 20'
                 })
-                .when('/:userName/uploads/:uploadId',{
+                .when('/username/:userName/uploads/:uploadId',{
                     templateUrl: 'app/views/userUploadsView.html',
                     controller: 'displayUploadCtrl',
                     title: 'Upload'
                 })
-                .when('/:userName',{
+                .when('/username/:userName',{
                     templateUrl: 'app/views/userView.html',
                     controller: 'userCtrl',
                     title: 'My uploads'
                 })
-                .when('/:userName/edit',{
+                .when('/username/:userName/edit',{
                     templateUrl: 'app/views/userEditView.html',
                     controller: 'userEditCtrl',
                     title: 'Edit my profile'
@@ -127,11 +132,6 @@ var app = angular.module('app', [
                 .when('/croptest',{
                     templateUrl: 'app/views/testView.html',
                     controller: 'cropCtrl' //testing cropping
-                })
-                .when('/404',{
-                    templateUrl: 'app/views/404View.html',
-                    controller: 'errorCtrl',
-                    title: 'Page not found'
                 })
                 .otherwise({'redirectTo': '/404'
                 });

@@ -2,6 +2,10 @@ var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "ang
     a.when("/", {
         templateUrl: "app/views/homepageView.html",
         title: "Home"
+    }).when("/404", {
+        templateUrl: "app/views/404View.html",
+        controller: "errorCtrl",
+        title: "Page not found"
     }).when("/random", {
         templateUrl: "app/views/homepageRandom.html",
         title: "Random"
@@ -56,15 +60,15 @@ var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "ang
         templateUrl: "app/views/topView.html",
         controller: "topCtrl",
         title: "Top 20"
-    }).when("/:userName/uploads/:uploadId", {
+    }).when("/username/:userName/uploads/:uploadId", {
         templateUrl: "app/views/userUploadsView.html",
         controller: "displayUploadCtrl",
         title: "Upload"
-    }).when("/:userName", {
+    }).when("/username/:userName", {
         templateUrl: "app/views/userView.html",
         controller: "userCtrl",
         title: "My uploads"
-    }).when("/:userName/edit", {
+    }).when("/username/:userName/edit", {
         templateUrl: "app/views/userEditView.html",
         controller: "userEditCtrl",
         title: "Edit my profile"
@@ -75,10 +79,6 @@ var app = angular.module("app", [ "ngRoute", "ui.bootstrap", "ngTagsInput", "ang
     }).when("/croptest", {
         templateUrl: "app/views/testView.html",
         controller: "cropCtrl"
-    }).when("/404", {
-        templateUrl: "app/views/404View.html",
-        controller: "errorCtrl",
-        title: "Page not found"
     }).otherwise({
         redirectTo: "/404"
     }), b.html5Mode(!1).hashPrefix("!"), c.defaults = {
@@ -316,7 +316,8 @@ var fileUploadCtrl = function(a, b, c, d, e, f, g, h, i) {
             }).progress(function(b) {
                 a.progressBar = parseInt(100 * b.loaded / b.total);
             }).success(function(b) {
-                a.resizeImage(b, 760, 760, 120, 90, 460, 345, 75), e.path("/userName/uploads/" + b);
+                a.resizeImage(b, 760, 760, 120, 90, 460, 345, 75), console.log("/username/" + a.isUserLogged + "/uploads/" + b), 
+                e.path("/username/" + a.isUserLogged + "/uploads/" + b);
             }).error(function() {}).xhr(function(a) {
                 a.upload.addEventListener("abort", function() {
                     console.log("aborted complete");
@@ -335,7 +336,7 @@ var fileUploadCtrl = function(a, b, c, d, e, f, g, h, i) {
                     file: a.getURLParam("v")
                 }
             }).success(function(b) {
-                e.path("/" + a.isUserLogged + "/uploads/" + b);
+                console.log("/username/" + a.isUserLogged + "/uploads/" + b), e.path("/username/" + a.isUserLogged + "/uploads/" + b);
             }).error(function(a) {
                 console.log(a);
             }));
@@ -924,7 +925,7 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
     };
 } ]), app.service("displayUploadService", [ "$http", "$location", "configService", function(a, b, c) {
     var d = [], e = function() {
-        var e = b.path().split("/")[3] || "Unknown", f = c.API_END_POINT + "upload/" + e;
+        var e = b.path().split("/")[4] || "Unknown", f = c.API_END_POINT + "upload/" + e;
         a.get(f).then(function(a) {
             console.log(a.data), angular.copy(JSON.parse("[" + JSON.stringify(a.data) + "]"), d);
         }, function() {});
@@ -1039,7 +1040,7 @@ userRandomCtrl.$inject = [ "$scope", "userCloudService" ], app.service("data", [
     };
 } ]), app.service("userLeaderboardService", [ "$http", "$location", "configService", function(a, b, c) {
     var d = [], e = function() {
-        var e = b.path().split("/")[1] || "Unknown", f = c.API_END_POINT + "leaderboard/" + e + "/1000";
+        var e = b.path().split("/")[2] || "Unknown", f = c.API_END_POINT + "leaderboard/" + e + "/1000";
         a.get(f).then(function(a) {
             angular.copy(a.data, d);
         }, function() {});

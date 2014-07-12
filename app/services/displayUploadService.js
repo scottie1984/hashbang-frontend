@@ -4,7 +4,7 @@ app.service('displayUploadService', ['$http', '$location', 'configService',  fun
 
     var _getDisplayUploadData = function(){
     
-        var tagId = $location.path().split('/')[3]||'Unknown';
+        var tagId = $location.path().split('/')[4]||'Unknown';
 
 
         var url  = configService.API_END_POINT+'upload/'+tagId+'';

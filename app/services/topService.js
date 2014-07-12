@@ -34,7 +34,7 @@ app.service('userLeaderboardService', ['$http', '$location', 'configService', fu
 
     var _gettopData = function(){
         
-        var pageTag = $location.path().split('/')[1]||'Unknown';
+        var pageTag = $location.path().split('/')[2]||'Unknown';
 
         var url  = configService.API_END_POINT+ 'leaderboard/' + pageTag + '/1000';
         //var url  = 'app/data/top.json';
