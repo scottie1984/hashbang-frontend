@@ -136,9 +136,8 @@ var app = angular.module('app', [
                 .otherwise({'redirectTo': '/404'
                 });
 
-            $locationProvider
-            .html5Mode(false)
-            .hashPrefix('!');
+            $locationProvider.html5Mode(false);
+            $locationProvider.hashPrefix('!');
 
 
 
