@@ -8,13 +8,11 @@ app.use('/assets', express.static('assets'));
 app.use('/templates', express.static('app/templates'));
 app.use('/views', express.static('app/views'));
 
-
-app.get('', function (req, res) {
-    res.sendfile('./app/public.html');
-});
-
 app.use(require('prerender-node').set('prerenderToken', '5QUDyBsGmfyDFqVugAQ2'));
 
+app.get('/', function (req, res) {
+    res.sendfile('./app/public.html');
+});
 
 app.listen(port);
 
