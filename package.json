@@ -7,7 +7,7 @@
       "url": "https://github.com/scottie1984/hashbang-frontend"
     },
   "devDependencies": {
-    "express": "^4.1.1",
+    "express": "latest",
     "grunt": "~0.4.1",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-compass": "~0.2.0",
@@ -22,7 +22,7 @@
 	"prerender-node": "latest"
   },
   "dependencies": {
-    "express": "^4.1.1",
+    "express": "latest",
     "grunt": "~0.4.1",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-compass": "~0.2.0",

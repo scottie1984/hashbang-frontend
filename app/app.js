@@ -28,109 +28,109 @@ var app = angular.module('app', [
             $routeProvider
                 .when('/',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageView.html',
+                    templateUrl: 'views/homepageView.html',
                     title: 'Home'
                     //controller: 'homepageCtrl'
                 })
                 .when('/404',{
-                    templateUrl: 'app/views/404View.html',
+                    templateUrl: 'views/404View.html',
                     controller: 'errorCtrl',
                     title: 'Page not found'
                 })
                 .when('/random',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageRandom.html',
+                    templateUrl: 'views/homepageRandom.html',
                     title: 'Random'
                     //controller: 'homepageCtrl'
                 })
                 .when('/recent',{
                     //redirectTo: '/rate/tag/cat', /* todo: make it go to a random tag or most popular? */
-                    templateUrl: 'app/views/homepageRecent.html',
+                    templateUrl: 'views/homepageRecent.html',
                     title: 'Recent'
                     //controller: 'homepageCtrl'
                 })
                 .when('/rate/:type/:tag/:id/:prevId',{
-                    templateUrl: 'app/views/ratingView.html',
+                    templateUrl: 'views/ratingView.html',
                     controller: 'ratingCtrl',
                     title: 'Rate'
                 })
                 .when('/rate/:type/:tag',{
-                    templateUrl: 'app/views/ratingView.html',
+                    templateUrl: 'views/ratingView.html',
                     controller: 'ratingCtrl',
                     title: 'Rate'
                 })
                 .when('/rate/:type/:tag/end/:prevId/:prevId',{
-                    templateUrl: 'app/views/ratingEndView.html',
+                    templateUrl: 'views/ratingEndView.html',
                     controller: 'endCtrl',
                     title: 'Rate'
                 })
                 .when('/tagsearch',{
-                    templateUrl: 'app/views/tagSearchView.html',
+                    templateUrl: 'views/tagSearchView.html',
                     controller: 'tagSearchCtrl',
                     title: 'Search'
                 })
                 .when('/login',{
-                    templateUrl: 'app/views/loginView.html',
+                    templateUrl: 'views/loginView.html',
                     controller: 'loginCtrl',
                     title: 'Login'
                 })
                 .when('/logout',{
-                    templateUrl: 'app/views/uploadView.html',
+                    templateUrl: 'views/uploadView.html',
                     controller: 'logoutCtrl',
                     title: 'Logout'
                 })
                 .when('/feedback',{
-                    templateUrl: 'app/views/feedbackView.html',
+                    templateUrl: 'views/feedbackView.html',
                     controller: 'feedbackCtrl',
                     title: 'Feedback'
                 })
                 .when('/signup',{
-                    templateUrl: 'app/views/signupView.html',
+                    templateUrl: 'views/signupView.html',
                     controller: 'signupCtrl',
                     title: 'Sign up'
                 })
                 .when('/forgot/:token',{
-                    templateUrl: 'app/views/forgotPassword.html',
+                    templateUrl: 'views/forgotPassword.html',
                     controller: 'forgotPasswordCtrl',
                     title: 'Forgot'
                 })
                 .when('/forgot',{
-                    templateUrl: 'app/views/forgotView.html',
+                    templateUrl: 'views/forgotView.html',
                     controller: 'forgotCtrl',
                     title: 'Forgot'
                 })
                 .when('/upload',{
-                    templateUrl: 'app/views/uploadView.html',
+                    templateUrl: 'views/uploadView.html',
                     controller: 'fileUploadCtrl',
                     title: 'Upload'
                 })
                 .when('/top/:type/:tag',{
-                    templateUrl: 'app/views/topView.html',
+                    templateUrl: 'views/topView.html',
                     controller: 'topCtrl',
                     title: 'Top 20'
                 })
                 .when('/username/:userName/uploads/:uploadId',{
-                    templateUrl: 'app/views/userUploadsView.html',
+                    templateUrl: 'views/userUploadsView.html',
                     controller: 'displayUploadCtrl',
                     title: 'Upload'
                 })
                 .when('/username/:userName',{
-                    templateUrl: 'app/views/userView.html',
+                    templateUrl: 'views/userView.html',
                     controller: 'userCtrl',
                     title: 'My uploads'
                 })
                 .when('/username/:userName/edit',{
-                    templateUrl: 'app/views/userEditView.html',
+                    templateUrl: 'views/userEditView.html',
                     controller: 'userEditCtrl',
                     title: 'Edit my profile'
                 })
                 .when('/user/:token',{
-                    templateUrl: 'app/views/activateView.html',
+                    templateUrl: 'views/activateView.html',
                     controller: 'activateCtrl',
                     title: 'Activate my account'
                 })
                 .when('/croptest',{
-                    templateUrl: 'app/views/testView.html',
+                    templateUrl: 'views/testView.html',
                     controller: 'cropCtrl' //testing cropping
                 })
                 .otherwise({'redirectTo': '/404'
