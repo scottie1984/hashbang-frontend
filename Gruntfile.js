@@ -11,11 +11,11 @@ module.exports = function(grunt) {
 
             production: {
                 options: {
-                    sassDir: 'app/assets/sass',
-                    cssDir: 'app/public/css/',
-                    imagesDir: 'app/public/img',
+                    sassDir: 'assets/sass',
+                    cssDir: 'public/css/',
+                    imagesDir: 'public/img',
                     httpImagesPath: '/images/',
-                    specify: 'app/assets/sass/style.scss',
+                    specify: 'assets/sass/style.scss',
                     relativeAssets: true,
                     environment: 'development'
                     //environment: 'production'
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                     'app/services/*.js',
                     'app/directives/*.js'
                 ],
-                dest: 'app/public/js/app.js'
+                dest: 'public/js/app.js'
             }
         },
 
@@ -47,44 +47,44 @@ module.exports = function(grunt) {
                 'app/directives/*.js'
                 ],
             afterconcat: [
-                'app/public/js/app.js'
+                'public/js/app.js'
                 ]
         },
 
         uglify: {
             core: {
                 files: {
-                    'app/public/js/core.js' : [
+                    'public/js/core.js' : [
                         //jquery
-                        'app/assets/js/jquery/jquery-1.10.2.min.js',
-                        'app/assets/js/jquery/jquery.Jcrop.min.js',
-                        'app/assets/js/jquery/jquery.masonry.min.js',
+                        'assets/js/jquery/jquery-1.10.2.min.js',
+                        'assets/js/jquery/jquery.Jcrop.min.js',
+                        'assets/js/jquery/jquery.masonry.min.js',
                         //angular libs
-                        'app/assets/js/lib/lodash.min.js',
-                        'app/assets/js/file-upload/angular-file-upload-shim.min.js',
-                        'app/assets/js/lib/angular.min.js',
+                        'assets/js/lib/lodash.min.js',
+                        'assets/js/file-upload/angular-file-upload-shim.min.js',
+                        'assets/js/lib/angular.min.js',
                         //angular modules
-						'app/assets/js/lib/cookies.js',
-                        'app/assets/js/file-upload/angular-file-upload.min.js',
-                        'app/assets/js/lib/angular-route.min.js',
-                        'app/assets/js/lib/ng-sanitize.js',
-                        'app/assets/js/lib/ng-tags-input.min.js',
-                        'app/assets/js/lib/angular-gravatar.js',
-                        'app/assets/js/lib/md5.js',
-                        'app/assets/js/lib/imagesloaded.js',
-                        'app/assets/js/lib/angular-masonry.js',
-                        'app/assets/js/lib/angular-truncate.js',
-                        'app/assets/js/lib/angular-animate.min.js',
+						'assets/js/lib/cookies.js',
+                        'assets/js/file-upload/angular-file-upload.min.js',
+                        'assets/js/lib/angular-route.min.js',
+                        'assets/js/lib/ng-sanitize.js',
+                        'assets/js/lib/ng-tags-input.min.js',
+                        'assets/js/lib/angular-gravatar.js',
+                        'assets/js/lib/md5.js',
+                        'assets/js/lib/imagesloaded.js',
+                        'assets/js/lib/angular-masonry.js',
+                        'assets/js/lib/angular-truncate.js',
+                        'assets/js/lib/angular-animate.min.js',
 						//angulatics modules
-						'app/assets/js/lib/angulartics-ga.js',
-						'app/assets/js/lib/angulartics.js',
+						'assets/js/lib/angulartics-ga.js',
+						'assets/js/lib/angulartics.js',
                         //ui-bootstrap
-                        'app/assets/js/ui-bootstrap/ui-bootstrap.js',
+                        'assets/js/ui-bootstrap/ui-bootstrap.js',
                         //flat ui
-                        'app/assets/js/flat-ui/jquery-ui-1.10.3.custom.min.js',
-                        'app/assets/js/flat-ui/jquery.placeholder.js',
-                        'app/assets/js/flat-ui/flatui-checkbox.js',
-                        'app/assets/js/flat-ui/flatui-radio.js'
+                        'assets/js/flat-ui/jquery-ui-1.10.3.custom.min.js',
+                        'assets/js/flat-ui/jquery.placeholder.js',
+                        'assets/js/flat-ui/flatui-checkbox.js',
+                        'assets/js/flat-ui/flatui-radio.js'
                         ]
                 }
             },
@@ -93,8 +93,8 @@ module.exports = function(grunt) {
                      beautify: true
                 },
                 files: {
-                    'app/public/js/app.js' : [
-                        'app/public/js/app.js'
+                    'public/js/app.js' : [
+                        'public/js/app.js'
                     ]
                 }
             }
@@ -106,10 +106,10 @@ module.exports = function(grunt) {
                         expand: true, 
                         flatten: true, 
                         src: [
-                        'app/assets/js/shim/html5shiv.js', 
-                        'app/assets/js/shim/respond.min.js'
+                        'assets/js/shim/html5shiv.js', 
+                        'assets/js/shim/respond.min.js'
                         ], 
-                        dest: 'app/public/js/', 
+                        dest: 'public/js/', 
                         filter: 'isFile'
                     }]
             },
@@ -118,9 +118,9 @@ module.exports = function(grunt) {
                         expand: true, 
                         flatten: true, 
                         src: [
-                        'app/assets/img/*'
+                        'assets/img/*'
                         ], 
-                        dest: 'app/public/img/', 
+                        dest: 'public/img/', 
                         filter: 'isFile'
                     }]
             },
@@ -129,9 +129,9 @@ module.exports = function(grunt) {
                         expand: true, 
                         flatten: true, 
                         src: [
-                        'app/assets/fonts/*/*'
+                        'assets/fonts/*/*'
                         ], 
-                        dest: 'app/public/fonts/', 
+                        dest: 'public/fonts/', 
                         filter: 'isFile'
                     }]
             }                         
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
                 src: 'app/tests/scripts/*.js',
                     options: {
                         vendor: [
-                        'app/assets/js/jquery/jquery-1.10.2.min.js',
+                        'assets/js/jquery/jquery-1.10.2.min.js',
                         'app/tests/vendor/jasmine-jquery.js'
                         ],
                         specs: 'app/tests/specs/*.spec.js'
