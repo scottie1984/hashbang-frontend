@@ -39,3 +39,8 @@ footer.footer{
 
 	}
 }
+@media (max-width: $screen-xs-min) { 
+ 	.footer-brand{
+ 		margin-bottom: 60px;
+ 	}
+} 	

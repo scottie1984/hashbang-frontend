@@ -144,6 +144,14 @@
   }
 }
 
+
+@media (max-width: $screen-md-min) {
+  .navbar-brand{
+      margin-right: 0;
+  }
+}
+
+
 // Navbar toggle
 //
 // Custom button for toggling the `.navbar-collapse`, powered by the collapse
